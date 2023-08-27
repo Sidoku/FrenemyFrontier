@@ -35,7 +35,7 @@ public class LagCompensation : MonoBehaviourPunCallbacks, IPunObservable
     private void Awake()
     {
         PhotonNetwork.SendRate = 60;
-        PhotonNetwork.SerializationRate = 30;
+        PhotonNetwork.SerializationRate = 60;
         animator = GetComponentInChildren<Animator>();
     }
 

@@ -40,6 +40,15 @@ MonoBehaviour:
   - Fire
   - RespawnSpaceship
   - UpdatePlayerLooks
+  - OnDamageRecieved
+  - OnDamageRecievedBon
+  - OnDamageRecievedCrim
+  - OnCatch
+  - RPC_ActivateParticleSystem
+  - RPC_DeactivateParticleSystem
+  - RPC_ActivateParticleSystems
+  - RPC_DeactivateParticleSystems
+  - GotFree
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -108,6 +108,7 @@ namespace StarterAssets
         // Pistol animation
         public int pistolID;
         private bool isAttacking = false;
+        public bool onHold = false;
 
         // timeout deltatime
         private float _jumpTimeoutDelta;
@@ -128,10 +129,11 @@ namespace StarterAssets
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
 
+
         private const float _threshold = 0.01f;
 
         private bool _hasAnimator;
-
+     
         private bool IsCurrentDeviceMouse
         {
             get
@@ -178,11 +180,20 @@ namespace StarterAssets
         private void Update()
         {
             //_hasAnimator = _animator;
+            if(!onHold)
+            {
+                JumpAndGravity();
+                GroundedCheck();
+                Move();
+            }
+           
 
-            JumpAndGravity();
-            GroundedCheck();
-            Move();
+            //this.gameObject.transform.rotation = _mainCamera.transform.rotation;
+
          
+            
+       
+            
         }
 
        

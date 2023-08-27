@@ -6,6 +6,9 @@ TagManager:
   tags:
   - CinemachineTarget
   - playerItem
+  - weapon
+  - weaponInHand
+  - catchattack
   layers:
   - Default
   - TransparentFX
