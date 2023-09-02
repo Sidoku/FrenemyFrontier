@@ -177,10 +177,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             }
         }
 
-        PhotonNetwork.LoadLevel("Game");
+        //PhotonNetwork.LoadLevel("Game");
 
 
-        /* if(BountyHunters == Criminals && all_values_are_different())
+         if(BountyHunters == Criminals && all_values_are_different())
          {
              PhotonNetwork.LoadLevel("Game");
          }
@@ -189,7 +189,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
              debug_text.gameObject.SetActive(true);
              debug_text.text = "Please select equal number of bounty hunters and criminals or make sure to select different character for each player";
-         }*/
+         }
 
     }
 
