@@ -9,6 +9,7 @@ TagManager:
   - weapon
   - weaponInHand
   - catchattack
+  - Ping
   layers:
   - Default
   - TransparentFX

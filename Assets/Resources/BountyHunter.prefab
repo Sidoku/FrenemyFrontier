@@ -655,7 +655,7 @@ PrefabInstance:
     - target: {fileID: 3253995348016013882, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.20000005
+      value: 0.8000002
       objectReference: {fileID: 0}
     - target: {fileID: 3253995348016013882, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}
@@ -722,6 +722,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3571823620301205138, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3629301023291885591, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}
       propertyPath: m_Layer
@@ -740,7 +745,7 @@ PrefabInstance:
     - target: {fileID: 3721983129587729846, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3723036075102305966, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}
@@ -1570,7 +1575,7 @@ PrefabInstance:
     - target: {fileID: 8744835394758104309, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.20000005
+      value: 0.8000002
       objectReference: {fileID: 0}
     - target: {fileID: 8744835394758104309, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}
@@ -1631,6 +1636,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9090067752089948298, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9103940194154012464, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}
@@ -1849,6 +1859,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MiniMapCam
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093188803597826897, guid: 0c715419cf3b3c140a51220589de363d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4093188803597826898, guid: 0c715419cf3b3c140a51220589de363d,
         type: 3}

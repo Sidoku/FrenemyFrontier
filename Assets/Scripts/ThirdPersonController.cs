@@ -1,8 +1,8 @@
-﻿using System.Threading;
+﻿using UnityEngine;
 using Unity.VisualScripting;
-using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
+using Cinemachine;
 #endif
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
@@ -74,6 +74,8 @@ namespace StarterAssets
         [Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
         public GameObject CinemachineCameraTarget;
 
+       [SerializeField] private CinemachineVirtualCamera aimVirtualCamera;
+
         [Tooltip("How far in degrees can you move the camera up")]
         public float TopClamp = 70.0f;
 
@@ -97,15 +99,23 @@ namespace StarterAssets
         private float _rotationVelocity;
         private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
+        private Vector3 mouseWorldPosition;
 
-        // Infected area
-        private Material mMaterial;
-        private float _alphaIncreaseValue = 20.0f;
+        //Camera Sensitivity
+        [SerializeField] private float normalSensitivity = 1.0f;
+        [SerializeField] private float aimSensitivity = 0.5f;
+        private float Sensitivity = 1.0f;
+
+        /* Infected area
+         private Material mMaterial;
+         private float _alphaIncreaseValue = 20.0f;*/
 
         private Collider _other;
         // private bool isMouseDown = false;
 
         // Pistol animation
+        /*public int pistolID;
+        private bool isAttacking = false;*/
         public int pistolID;
         private bool isAttacking = false;
         public bool onHold = false;
@@ -154,6 +164,8 @@ namespace StarterAssets
             {
                 _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
             }
+
+            _input = GetComponent<StarterAssetsInputs>();
         }
 
         private void Start()
@@ -162,7 +174,6 @@ namespace StarterAssets
 
             // _hasAnimator = _animator;
             _controller = GetComponent<CharacterController>();
-            _input = GetComponent<StarterAssetsInputs>();
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
             _playerInput = GetComponent<PlayerInput>();
 #else
@@ -226,9 +237,6 @@ namespace StarterAssets
             // }
         }
 
-   
-
-
 
         private void CameraRotation()
         {
@@ -238,8 +246,8 @@ namespace StarterAssets
                 //Don't multiply mouse input by Time.deltaTime;
                 float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
 
-                _cinemachineTargetYaw += _input.look.x * deltaTimeMultiplier;
-                _cinemachineTargetPitch += _input.look.y * deltaTimeMultiplier;
+                _cinemachineTargetYaw += _input.look.x * deltaTimeMultiplier * Sensitivity;
+                _cinemachineTargetPitch += _input.look.y * deltaTimeMultiplier * Sensitivity;
             }
 
             // clamp our rotations so our values are limited 360 degrees
@@ -249,6 +257,32 @@ namespace StarterAssets
             // Cinemachine will follow this target
             CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
                 _cinemachineTargetYaw, 0.0f);
+        }
+
+        private void Aim()
+        {
+            if(_input.aim)
+            {
+                aimVirtualCamera.gameObject.SetActive(true);
+                SetSensitivity(aimSensitivity);
+            } else
+            {
+                aimVirtualCamera.gameObject.SetActive(false);
+                SetSensitivity(normalSensitivity);
+            }
+
+            Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
+
+            Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
+            if(Physics.Raycast(ray, out RaycastHit raycastHit))
+            {
+                mouseWorldPosition = raycastHit.point;
+            }
+
+            if(Input.GetMouseButtonDown(2))
+            {
+                PingSystem.AddPing(mouseWorldPosition);
+            }
         }
 
         private void Move()
@@ -407,6 +441,11 @@ namespace StarterAssets
             Gizmos.DrawSphere(
                 new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z),
                 GroundedRadius);
+        }
+
+        public void SetSensitivity(float newSensitivity)
+        {
+            Sensitivity = newSensitivity;
         }
 
         private void OnFootstep(AnimationEvent animationEvent)

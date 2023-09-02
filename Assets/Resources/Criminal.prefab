@@ -280,10 +280,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: MiniMapCam
       objectReference: {fileID: 0}
+    - target: {fileID: 4093188803597826897, guid: 0c715419cf3b3c140a51220589de363d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4093188803597826898, guid: 0c715419cf3b3c140a51220589de363d,
         type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 2871
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093188803597826899, guid: 0c715419cf3b3c140a51220589de363d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4093188803597826909, guid: 0c715419cf3b3c140a51220589de363d,
         type: 3}
@@ -943,6 +953,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3571823620301205138, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3629301023291885591, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}
@@ -1858,6 +1873,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 9090067752089948298, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9103940194154012464, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}

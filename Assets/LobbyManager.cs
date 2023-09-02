@@ -41,7 +41,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        if(PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount >=2) { 
+        if(PhotonNetwork.IsMasterClient /*&& PhotonNetwork.CurrentRoom.PlayerCount >=2*/) { 
         
           PlayButton.SetActive(true);
         }else
@@ -177,18 +177,20 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             }
         }
 
-        
-        if(BountyHunters == Criminals && all_values_are_different())
-        {
-            PhotonNetwork.LoadLevel("Game");
-        }
-        else
-        {
-            
-            debug_text.gameObject.SetActive(true);
-            debug_text.text = "Please select equal number of bounty hunters and criminals or make sure to select different character for each player";
-        }
-        
+        PhotonNetwork.LoadLevel("Game");
+
+
+        /* if(BountyHunters == Criminals && all_values_are_different())
+         {
+             PhotonNetwork.LoadLevel("Game");
+         }
+         else
+         {
+
+             debug_text.gameObject.SetActive(true);
+             debug_text.text = "Please select equal number of bounty hunters and criminals or make sure to select different character for each player";
+         }*/
+
     }
 
    public  bool all_values_are_different()
