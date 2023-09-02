@@ -196,15 +196,9 @@ namespace StarterAssets
                 JumpAndGravity();
                 GroundedCheck();
                 Move();
+                Aim();
             }
-           
-
             //this.gameObject.transform.rotation = _mainCamera.transform.rotation;
-
-         
-            
-       
-            
         }
 
        
