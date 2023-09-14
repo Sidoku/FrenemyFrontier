@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using TMPro;
+using UnityEditor.Rendering;
 
 public class DamageControlCrim : MonoBehaviourPunCallbacks
 {
@@ -11,6 +12,8 @@ public class DamageControlCrim : MonoBehaviourPunCallbacks
     public float attackCooldown = 0.2f;
     private bool canAttack = true;
     public bool onHold = false;
+    public TMP_Text catchme;
+    public GameObject exl;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +32,20 @@ public class DamageControlCrim : MonoBehaviourPunCallbacks
             if (Input.GetMouseButtonDown(0) && canAttack && !onHold)
             {
                 PerformAttack();
+            }
+
+            if (Health <= 20)
+            {
+
+                exl.SetActive(true);
+                exl.gameObject.GetComponent<PhotonView>().RPC("ChangeText", RpcTarget.AllBuffered);
+
+            }
+            else
+            {
+
+
+                exl.gameObject.GetComponent<PhotonView>().RPC("RemoveText", RpcTarget.AllBuffered);
             }
         }
      
@@ -92,6 +109,8 @@ public class DamageControlCrim : MonoBehaviourPunCallbacks
 
             }
 
+           
+
             healthtxt.text = Health.ToString();
         }
    
@@ -102,13 +121,15 @@ public class DamageControlCrim : MonoBehaviourPunCallbacks
    
 
 
-   IEnumerator ResetSpawnAndHealth()
+   public IEnumerator ResetSpawnAndHealth()
     {
 
         this.gameObject.GetComponent<CriminalRespawn>().Respawn();
         yield return new WaitForSeconds(1.5f);
         Health = 100;
         healthtxt.text = Health.ToString();
+       // exl.gameObject.GetComponent<PhotonView>().RPC("RemoveText", RpcTarget.AllBuffered);
+    
     }
 
     private IEnumerator ResetAttackCooldown()

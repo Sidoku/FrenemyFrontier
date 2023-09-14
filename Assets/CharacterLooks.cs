@@ -64,10 +64,34 @@ public class CharacterLooks : MonoBehaviourPunCallbacks
                 {
                     item.SetActive(false);
                 }
+        }
+        else if (playerAvatar == 2)
+        {
+            foreach (GameObject item in EnableItems3)
+            {
+                item.SetActive(true);
             }
-        
-        
 
-        
+            foreach (GameObject item in DisableItems3)
+            {
+                item.SetActive(false);
+            }
+        }
+        else if (playerAvatar == 3)
+        {
+            foreach (GameObject item in EnableItems4)
+            {
+                item.SetActive(true);
+            }
+
+            foreach (GameObject item in DisableItems4)
+            {
+                item.SetActive(false);
+            }
+        }
+
+
+
+
     }
 }

@@ -99,12 +99,14 @@ namespace StarterAssets
         private float _rotationVelocity;
         private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
-        private Vector3 mouseWorldPosition;
+        public Vector3 mouseWorldPosition;
 
         //Camera Sensitivity
         [SerializeField] private float normalSensitivity = 1.0f;
         [SerializeField] private float aimSensitivity = 0.5f;
         private float Sensitivity = 1.0f;
+        [SerializeField] private GameObject crosshair;
+        public bool isAiming = false;
 
         /* Infected area
          private Material mMaterial;
@@ -138,7 +140,8 @@ namespace StarterAssets
         private CharacterController _controller;
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
-
+        public Camera playerCam;
+        public GameObject Ping;
 
         private const float _threshold = 0.01f;
 
@@ -186,6 +189,7 @@ namespace StarterAssets
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
+            crosshair.SetActive(false);
         }
 
         private void Update()
@@ -259,15 +263,19 @@ namespace StarterAssets
             {
                 aimVirtualCamera.gameObject.SetActive(true);
                 SetSensitivity(aimSensitivity);
+                crosshair.SetActive(true);
+                isAiming= true;
             } else
             {
                 aimVirtualCamera.gameObject.SetActive(false);
                 SetSensitivity(normalSensitivity);
+                crosshair.SetActive(false);
+                isAiming= false;
             }
 
             Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
 
-            Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
+            Ray ray = playerCam.ScreenPointToRay(screenCenterPoint);
             if(Physics.Raycast(ray, out RaycastHit raycastHit))
             {
                 mouseWorldPosition = raycastHit.point;
@@ -275,7 +283,9 @@ namespace StarterAssets
 
             if(Input.GetMouseButtonDown(2))
             {
-                PingSystem.AddPing(mouseWorldPosition);
+                //PingSystem.AddPing(mouseWorldPosition);
+                //Ping.transform.position = mouseWorldPosition;   
+                
             }
         }
 

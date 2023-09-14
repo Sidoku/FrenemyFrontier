@@ -10,6 +10,7 @@ public class GotHold : MonoBehaviourPunCallbacks
     Animator anim;
     GameObject bountyHunter;
     public bool gotHold = false;
+    public Vector3 jailPos;
  
 
     Vector3 offset = new Vector3(1f, 0f, -1f);
@@ -51,6 +52,17 @@ public class GotHold : MonoBehaviourPunCallbacks
         }
     }
 
+    [PunRPC]
+
+    public void GotJailed()
+    {
+        gotHold = false;
+        anim.Play("GettingUnHold");
+        this.transform.position = jailPos;
+        StartCoroutine(RestFromJail());
+
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "catchattack" && this.gameObject.GetComponent<DamageControlCrim>().Health <= 20) {
@@ -62,6 +74,17 @@ public class GotHold : MonoBehaviourPunCallbacks
              
             }
      
+        }
+
+        if(other.gameObject.tag == "jail" && gotHold)
+        {
+            if(photonView.IsMine)
+            {
+                
+                this.gameObject.GetComponent<PhotonView>().RPC("GotJailed", RpcTarget.AllBuffered);
+            }
+          
+
         }
     }
 
@@ -112,4 +135,18 @@ public class GotHold : MonoBehaviourPunCallbacks
         yield return new WaitForSeconds(0.2f);
         this.gameObject.GetComponent<PhotonView>().RPC("OnCatch", RpcTarget.AllBuffered);
     }
+
+    IEnumerator RestFromJail()
+    {
+        yield return new WaitForSeconds(10f);
+        this.gameObject.GetComponent<PhotonView>().RPC("ResetHealthSPwn", RpcTarget.AllBuffered);
+    }
+
+    [PunRPC]
+
+    public void ResetHealthSPwn()
+    {
+        StartCoroutine(GetComponent<DamageControlCrim>().ResetSpawnAndHealth());
+    }
+   
 }

@@ -9,11 +9,12 @@ public class GameManager : MonoBehaviourPunCallbacks
 
 
     public GameObject[] playerPrefabs;
-    //public GameObject pfPingWorld;
+   // public GameObject pfPingWorldB;
+   // public GameObject pfPingWorldC;
     public Transform pingSpawnPoint;
     public Transform bountyHunterSpawnPoint;
     public Transform CriminalSpawnPoint;
-    // public Transform PingSpawnPoint;
+   // public Transform PingSpawnPoint;
 
     public static GameManager instance;
 
@@ -38,7 +39,8 @@ public class GameManager : MonoBehaviourPunCallbacks
             CriminalPlayer.GetComponent<PhotonView>().RPC("UpdatePlayerLooks", RpcTarget.AllBuffered, playerAvatar);
         }
 
-        //PhotonNetwork.InstantiateRoomObject(pfPingWorld.name, pingSpawnPoint.position, Quaternion.identity);
+        //PhotonNetwork.InstantiateRoomObject(pfPingWorldB.name, pingSpawnPoint.position + new Vector3(1f,0,0), Quaternion.identity);
+        //PhotonNetwork.InstantiateRoomObject(pfPingWorldC.name, pingSpawnPoint.position, Quaternion.identity);
     }
 
     // Update is called once per frame
