@@ -105,8 +105,8 @@ MonoBehaviour:
   avatars:
   - {fileID: 21300000, guid: 0ee1943eb47ed20448b51b060730c60f, type: 3}
   - {fileID: 21300000, guid: ff2758e7ea4d0544ba3361eb54a60319, type: 3}
-  - {fileID: 21300000, guid: fb4bc4a227dec364ea3743d97fadfab2, type: 3}
-  - {fileID: 21300000, guid: 366de55d94c4b5a4f843dd44aa3d2786, type: 3}
+  - {fileID: 21300000, guid: cd682b5946bb00341a32265d92fc5dda, type: 3}
+  - {fileID: 21300000, guid: 08c0ed06b7b42464d958b54363fdcc6f, type: 3}
   playerRole: {fileID: 4053066431142541914}
   imagenumber: 0
 --- !u!1 &1211209259550714592

@@ -10,7 +10,7 @@ public class AnimationsManager : MonoBehaviourPunCallbacks
     public Animator anim;
     public string[] attackAnimationNames; // Array to store the names of your combo attack animations
     public int comboIndex = 0;
-    private bool isAttacking = true;
+    public bool isAttacking = true;
     int currentIntex = -1;
     public bool onHold = false;
 
@@ -23,21 +23,24 @@ public class AnimationsManager : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-
-     
-
-        if (Input.GetMouseButtonDown(0) && !onHold)
+        if(photonView.IsMine)
         {
-            if(isAttacking)
+            if (Input.GetMouseButtonDown(0) && !onHold)
             {
-                anim.Play(attackAnimationNames[0]);
-                isAttacking= false;
+                if (isAttacking)
+                {
+                    anim.Play(attackAnimationNames[0]);
+                    isAttacking = false;
+                }
+
+                currentIntex++;
+
+
             }
-            
-            currentIntex++;
-            
-           
+
         }
+
+
 
 
 

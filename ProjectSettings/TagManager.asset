@@ -13,6 +13,9 @@ TagManager:
   - PingB
   - PingC
   - jail
+  - tressure
+  - BH
+  - CR
   layers:
   - Default
   - TransparentFX

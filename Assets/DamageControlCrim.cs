@@ -14,12 +14,14 @@ public class DamageControlCrim : MonoBehaviourPunCallbacks
     public bool onHold = false;
     public TMP_Text catchme;
     public GameObject exl;
+    GameObject bountyHunter = null;
 
     // Start is called before the first frame update
     void Start()
     {
+        healthtxt.text = "Health " + Health.ToString();
 
-       // this.gameObject.GetComponent<WeaponTracker>().weaponCollider.enabled = false;
+        // this.gameObject.GetComponent<WeaponTracker>().weaponCollider.enabled = false;
     }
 
 
@@ -47,8 +49,11 @@ public class DamageControlCrim : MonoBehaviourPunCallbacks
 
                 exl.gameObject.GetComponent<PhotonView>().RPC("RemoveText", RpcTarget.AllBuffered);
             }
+
+          
         }
-     
+      
+
     }
 
 
@@ -74,45 +79,54 @@ public class DamageControlCrim : MonoBehaviourPunCallbacks
         if (other.gameObject.tag == "weaponInHand" && !onHold)
         {
             GameObject weapon = other.gameObject;
-
+            Debug.Log("AttackWeapon " + other.gameObject.name);
             if (weapon.transform.root.gameObject.layer == 10 && !onHold)
             {
-                
-                  
-                
-              
-                this.gameObject.GetComponent<PhotonView>().RPC("OnDamageRecievedCrim", RpcTarget.AllBuffered, weapon.GetComponent<WeaponDamage>().damage);
 
+               bountyHunter = other.gameObject.transform.root.gameObject;
+                Debug.Log("Attacked By " + bountyHunter.name);
+                int vd = bountyHunter.GetComponent<PhotonView>().ViewID;
+                //bountyHunter.GetComponent<PhotonView>().RPC("SetBountyCollected", RpcTarget.AllBuffered, this.GetComponent<BountyAdded>().bountyAdded);
+                this.gameObject.GetComponent<PhotonView>().RPC("OnDamageRecievedCrim", RpcTarget.AllBuffered, weapon.GetComponent<WeaponDamage>().damage,vd);
+                
+                
+
+                
+                
             }
 
         }
     }
 
     [PunRPC]
-    public void OnDamageRecievedCrim(int damage)
+    public void OnDamageRecievedCrim(int damage,int vd)
     {
+      
         if (!photonView.IsMine)
         {
             return;
         }
-
+      
         if(!onHold)
         {
             this.gameObject.GetComponentInChildren<AnimationsManager>().GetHitAnim();
 
             Health = Health - damage;
 
-            if (Health <= 0)
+            if(Health <= 0)
             {
                 StartCoroutine(ResetSpawnAndHealth());
-
-
+                StartCoroutine(AddDeathBounty(vd));
+                if(this.GetComponent<CoinsCollected>().coinsCollected >= 0)
+                {
+                    this.GetComponent<PhotonView>().RPC("LossCoins", RpcTarget.AllBuffered, (int)this.GetComponent<CoinsCollected>().coinsCollected / 2);
+                }
             }
 
-           
 
-            healthtxt.text = Health.ToString();
         }
+
+            healthtxt.text = "Health " + Health.ToString();
    
         
       
@@ -127,9 +141,10 @@ public class DamageControlCrim : MonoBehaviourPunCallbacks
         this.gameObject.GetComponent<CriminalRespawn>().Respawn();
         yield return new WaitForSeconds(1.5f);
         Health = 100;
-        healthtxt.text = Health.ToString();
-       // exl.gameObject.GetComponent<PhotonView>().RPC("RemoveText", RpcTarget.AllBuffered);
-    
+        healthtxt.text = "Health " + Health.ToString();
+        // exl.gameObject.GetComponent<PhotonView>().RPC("RemoveText", RpcTarget.AllBuffered);
+      
+
     }
 
     private IEnumerator ResetAttackCooldown()
@@ -140,6 +155,12 @@ public class DamageControlCrim : MonoBehaviourPunCallbacks
         this.gameObject.GetComponent<WeaponTracker>().weaponCollider.enabled = false;
     }
 
-
+    IEnumerator AddDeathBounty(int vd)
+    {
+        yield return new WaitForSeconds(1f);
+        PhotonView bh = PhotonView.Find(vd);
+        bh.RPC("SetBountyCollected", RpcTarget.AllBuffered,(int)this.GetComponent<BountyAdded>().bountyAdded/2);
+    }
+  
 
 }

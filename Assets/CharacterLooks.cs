@@ -8,7 +8,7 @@ public class CharacterLooks : MonoBehaviourPunCallbacks
 {
 
     Player player;
-    
+    public int currentPlayerAvatar;
     public List<GameObject> EnableItems1 = new List<GameObject>();
     public List<GameObject> DisableItems1 = new List<GameObject>();
     public List<GameObject> EnableItems2 = new List<GameObject>();
@@ -37,8 +37,9 @@ public class CharacterLooks : MonoBehaviourPunCallbacks
     public void UpdatePlayerLooks(int playerAvatar)
     {
 
-        
-        
+
+        currentPlayerAvatar = playerAvatar;
+
 
             if (playerAvatar == 0)
             {

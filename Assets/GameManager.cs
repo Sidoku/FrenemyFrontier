@@ -1,5 +1,6 @@
 using UnityEngine;
 using Photon.Pun;
+using System.Collections;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
@@ -47,5 +48,16 @@ public class GameManager : MonoBehaviourPunCallbacks
     void Update()
     {
 
+    }
+
+    public void EndGame()
+    {
+        StartCoroutine(TonextScene());
+    }
+
+    IEnumerator TonextScene()
+    {
+        yield return new WaitForSeconds(10f);
+        PhotonNetwork.LoadLevel("GameOver");
     }
 }

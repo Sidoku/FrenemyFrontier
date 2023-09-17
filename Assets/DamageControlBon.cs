@@ -11,11 +11,11 @@ public class DamageControlBon : MonoBehaviourPunCallbacks
     public TMP_Text healthtxt;
     public float attackCooldown = 0.2f;
     private bool canAttack = true;
-
+    GameObject criminal;
     // Start is called before the first frame update
     void Start()
     {
-
+        healthtxt.text = "Health " + Health.ToString();
         // this.gameObject.GetComponent<WeaponTracker>().weaponCollider.enabled = false;
     }
 
@@ -58,10 +58,12 @@ public class DamageControlBon : MonoBehaviourPunCallbacks
 
             if (weapon.transform.root.gameObject.layer == 11)
             {
-               
-                    
-                
-                this.gameObject.GetComponent<PhotonView>().RPC("OnDamageRecievedBon", RpcTarget.AllBuffered, weapon.GetComponent<WeaponDamage>().damage);
+
+                criminal = other.gameObject.transform.root.gameObject;
+                Debug.Log("Attacked By " + criminal.name);
+                int vd = criminal.GetComponent<PhotonView>().ViewID;
+
+                this.gameObject.GetComponent<PhotonView>().RPC("OnDamageRecievedBon", RpcTarget.AllBuffered, weapon.GetComponent<WeaponDamage>().damage, vd);
 
             }
 
@@ -69,7 +71,7 @@ public class DamageControlBon : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    public void OnDamageRecievedBon(int damage)
+    public void OnDamageRecievedBon(int damage,int vd)
     {
         if (!photonView.IsMine)
         {
@@ -83,10 +85,10 @@ public class DamageControlBon : MonoBehaviourPunCallbacks
         {
             StartCoroutine(ResetSpawnAndHealth());
 
-
+            StartCoroutine(AddDeathBounty(vd));
         }
 
-        healthtxt.text = Health.ToString();
+        healthtxt.text = "Health "  + Health.ToString();
 
 
     }
@@ -97,7 +99,7 @@ public class DamageControlBon : MonoBehaviourPunCallbacks
         this.gameObject.transform.position = new Vector3(-5.532719612121582f, 1f, 119.69508361816406f);
         yield return new WaitForSeconds(1.5f);
         Health = 100;
-        healthtxt.text = Health.ToString();
+        healthtxt.text = "Health " + Health.ToString();
     }
 
     private IEnumerator ResetAttackCooldown()
@@ -107,4 +109,13 @@ public class DamageControlBon : MonoBehaviourPunCallbacks
         canAttack = true;
         this.gameObject.GetComponent<WeaponTracker>().weaponCollider.enabled = false;
     }
+
+
+    IEnumerator AddDeathBounty(int vd)
+    {
+        yield return new WaitForSeconds(1f);
+        PhotonView cr = PhotonView.Find(vd);
+        cr.RPC("SetBounty", RpcTarget.AllBuffered,10000);
+    }
 }
+

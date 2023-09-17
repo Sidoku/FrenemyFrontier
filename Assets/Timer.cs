@@ -10,7 +10,8 @@ public class Timer : MonoBehaviourPunCallbacks, IPunObservable
     private float currentTime = 0.0f;
     private bool isTimerRunning = false;
     public TMP_Text timerText;
-
+    public bool abouttoEnd = false;
+    GameManager gm;
     public override void OnEnable()
     {
         base.OnEnable();
@@ -31,11 +32,26 @@ public class Timer : MonoBehaviourPunCallbacks, IPunObservable
         {
             
             currentTime -= Time.deltaTime;
+
+            
+
+            
+            
             if (currentTime <= 0)
             {
                 currentTime = 0;
                 isTimerRunning = false;
                 // Perform any actions you want to do when the timer runs out here
+
+
+               // abouttoEnd= true;
+                // eneCal = FindObjectOfType<GameEneCal>();
+                // eneCal.GetData();
+                
+                PhotonNetwork.LoadLevel("GameOver");
+               // gm =FindObjectOfType<GameManager>();
+               // gm.EndGame();
+                
             }
         }
 
@@ -45,6 +61,8 @@ public class Timer : MonoBehaviourPunCallbacks, IPunObservable
         string timeString = string.Format("{0:00}:{1:00}", minutes, seconds);
         timerText.text = timeString;
     }
+
+   
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
@@ -59,4 +77,8 @@ public class Timer : MonoBehaviourPunCallbacks, IPunObservable
             isTimerRunning = (bool)stream.ReceiveNext();
         }
     }
+
+
+    
+
 }

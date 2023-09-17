@@ -11,7 +11,7 @@ public class CatchCrim : MonoBehaviourPunCallbacks
     GameObject criminal = null;
     Animator anim;
     public bool gotHold;
-    public TMP_Text HelpUI;
+    //public TMP_Text HelpUI;
    
     // Start is called before the first frame update
     void Start()
@@ -73,6 +73,9 @@ public class CatchCrim : MonoBehaviourPunCallbacks
                 {
                     this.transform.LookAt(criminal.transform.position);
                     anim.Play("Catch");
+                    StartCoroutine(ConfirmPartcleDiable());
+                    
+                    this.GetComponentInChildren<AnimationsManager>().isAttacking = true;
                     gotHold = true;
                     //criminal.GetComponent<PhotonView>().RPC("OnCatch", RpcTarget.AllBuffered);
                 }
@@ -86,7 +89,8 @@ public class CatchCrim : MonoBehaviourPunCallbacks
                 StartCoroutine(WeaponControl());
             //this.transform.LookAt(criminal.transform.position);
             anim.Play("Catch");
-       
+            StartCoroutine(ConfirmPartcleDiable());
+            this.GetComponentInChildren<AnimationsManager>().isAttacking= true;
             
 
         }
@@ -115,9 +119,14 @@ public class CatchCrim : MonoBehaviourPunCallbacks
         this.gameObject.GetComponent<WeaponTracker>().currentWeapon.SetActive(true);
     }
 
+    IEnumerator ConfirmPartcleDiable()
+    {
+        yield return new WaitForSeconds(1f);
+        this.GetComponentInChildren<RayControl>().RayDeactivate();
+    }
 
 
-  
+
 
 
 }
