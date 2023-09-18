@@ -4,6 +4,8 @@ using UnityEngine;
 using Photon.Pun;
 using TMPro;
 using Photon.Pun.UtilityScripts;
+using StarterAssets;
+using UnityEngine.UIElements;
 
 public class BountyCollected : MonoBehaviourPunCallbacks
 {
@@ -13,6 +15,7 @@ public class BountyCollected : MonoBehaviourPunCallbacks
     ExitGames.Client.Photon.Hashtable playerProperties = new ExitGames.Client.Photon.Hashtable();
     Timer timer;
     bool doneCal = false;
+    [SerializeField] GameObject endgamePanel;
     public int bountyCollected
     {
         get => _bountyCollected;
@@ -32,6 +35,13 @@ public class BountyCollected : MonoBehaviourPunCallbacks
         bountycollectedText.text = "Bounty collected " + this.bountyCollected.ToString();
         if (timer.abouttoEnd && !doneCal)
         {
+            if (photonView.IsMine)
+            {
+                this.GetComponent<ThirdPersonController>().JumpHeight = 0f;
+                this.GetComponent<ThirdPersonController>().onHold = true;
+                endgamePanel.SetActive(true);
+            }
+          
             NetworkSetBounty();
             doneCal= true;
         }
@@ -49,8 +59,12 @@ public class BountyCollected : MonoBehaviourPunCallbacks
 
     public void NetworkSetBounty()
     {
-        playerProperties["Collected"] = this.bountyCollected;
-        PhotonNetwork.SetPlayerCustomProperties(playerProperties);
+        if(photonView.IsMine)
+        {
+            playerProperties["Collected"] = this.bountyCollected;
+            PhotonNetwork.SetPlayerCustomProperties(playerProperties);
+        }
+
 
     }
 }

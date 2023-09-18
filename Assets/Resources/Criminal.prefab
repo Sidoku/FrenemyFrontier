@@ -33,7 +33,7 @@ Transform:
   - {fileID: 2552422953253611920}
   - {fileID: 2323828073746604008}
   m_Father: {fileID: 7313373742829481132}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &515034506712805920
 MonoBehaviour:
@@ -103,7 +103,7 @@ RectTransform:
   m_Children:
   - {fileID: 6743483460346669049}
   m_Father: {fileID: 7313373742829481132}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1212,7 +1212,7 @@ PrefabInstance:
     - target: {fileID: 4093188803597826898, guid: 0c715419cf3b3c140a51220589de363d,
         type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 35639
+      value: 166711
       objectReference: {fileID: 0}
     - target: {fileID: 4093188803597826899, guid: 0c715419cf3b3c140a51220589de363d,
         type: 3}
@@ -1966,6 +1966,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 3886132189408961811, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
+        type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
     - target: {fileID: 3940438259163771015, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}
       propertyPath: m_Layer
@@ -2059,7 +2064,7 @@ PrefabInstance:
     - target: {fileID: 4566702595050937310, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4582546579697396869, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}
@@ -2451,6 +2456,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 6933363509676016457, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6937814622287938570, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}
       propertyPath: m_Layer
@@ -2650,6 +2660,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7824054064717999731, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7827213205623083250, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}
@@ -2914,7 +2929,7 @@ PrefabInstance:
     - target: {fileID: 9090067752089948298, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 9103940194154012464, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}
@@ -2953,6 +2968,12 @@ Transform:
 --- !u!4 &1536357513041980044 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8009810575982246831, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
+    type: 3}
+  m_PrefabInstance: {fileID: 8825556924524663075}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1652314139156004688 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7824054064717999731, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
     type: 3}
   m_PrefabInstance: {fileID: 8825556924524663075}
   m_PrefabAsset: {fileID: 0}
@@ -3048,6 +3069,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinscollectedText: {fileID: 3758471347151172009}
+  endgamePanel: {fileID: 1652314139156004688}
 --- !u!114 &3817545930193103292
 MonoBehaviour:
   m_ObjectHideFlags: 0

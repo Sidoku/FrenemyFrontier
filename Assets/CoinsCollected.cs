@@ -4,6 +4,8 @@ using UnityEngine;
 using TMPro;
 using Photon.Pun;
 using Photon.Pun.UtilityScripts;
+using StarterAssets;
+using UnityEngine.UI;
 
 public class CoinsCollected : MonoBehaviourPunCallbacks
 {
@@ -13,6 +15,8 @@ public class CoinsCollected : MonoBehaviourPunCallbacks
     ExitGames.Client.Photon.Hashtable playerProperties = new ExitGames.Client.Photon.Hashtable();
     Timer timer;
     bool doneCal = false;
+    [SerializeField] GameObject endgamePanel;
+
     public int coinsCollected
     {
         get => _coinsCollected;
@@ -31,7 +35,13 @@ public class CoinsCollected : MonoBehaviourPunCallbacks
     {
         coinscollectedText.text = "Coins collected " + this.coinsCollected.ToString();
         if(timer.abouttoEnd && !doneCal)
-        {
+        {   if(photonView.IsMine)
+            {
+                this.GetComponent<ThirdPersonController>().JumpHeight = 0f;
+                this.GetComponent<ThirdPersonController>().onHold = true;
+                endgamePanel.SetActive(true);
+            }
+           
             NetworkSetCoins();
             doneCal= true;
         }
@@ -62,7 +72,12 @@ public class CoinsCollected : MonoBehaviourPunCallbacks
 
     public void NetworkSetCoins()
     {
-        playerProperties["Collected"] = this.coinsCollected;
-        PhotonNetwork.SetPlayerCustomProperties(playerProperties);
+        if (photonView.IsMine)
+        {
+            playerProperties["Collected"] = this.coinsCollected;
+            PhotonNetwork.SetPlayerCustomProperties(playerProperties);
+        }
+
+        
     }
 }

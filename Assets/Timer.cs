@@ -44,13 +44,13 @@ public class Timer : MonoBehaviourPunCallbacks, IPunObservable
                 // Perform any actions you want to do when the timer runs out here
 
 
-               // abouttoEnd= true;
+               abouttoEnd= true;
                 // eneCal = FindObjectOfType<GameEneCal>();
                 // eneCal.GetData();
                 
-                PhotonNetwork.LoadLevel("GameOver");
-               // gm =FindObjectOfType<GameManager>();
-               // gm.EndGame();
+                //PhotonNetwork.LoadLevel("GameOver");
+                gm =FindObjectOfType<GameManager>();
+                gm.EndGame();
                 
             }
         }

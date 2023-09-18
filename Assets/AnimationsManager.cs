@@ -41,7 +41,7 @@ public class AnimationsManager : MonoBehaviourPunCallbacks
         }
 
 
-
+       
 
 
 
@@ -52,6 +52,7 @@ public class AnimationsManager : MonoBehaviourPunCallbacks
     public void GetHitAnim()
     {
         anim.Play("GetHit");
+        isAttacking = true;
     }
 
     public void OnComboAttackAnimationFinished()
@@ -100,5 +101,6 @@ public class AnimationsManager : MonoBehaviourPunCallbacks
 
     }
 
+  
 
 }
