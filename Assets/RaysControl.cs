@@ -17,7 +17,7 @@ public class RaysControl : MonoBehaviourPunCallbacks
     {
         
     }
-
+    [PunRPC]
     public void EnableParticleSystems()
     {
        
@@ -28,7 +28,7 @@ public class RaysControl : MonoBehaviourPunCallbacks
             ps.GetComponent<Hovl_Laser>().MaxLength = 0f;
         }
     }
-
+    [PunRPC]
     public void DisableParticleSystems()
     {
         

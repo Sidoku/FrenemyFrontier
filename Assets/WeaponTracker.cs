@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 
-public class WeaponTracker : MonoBehaviour
+public class WeaponTracker : MonoBehaviourPunCallbacks
 {
-    public GameObject currentWeapon;
+    public GameObject currentWeapon = null;
     public Collider weaponCollider;
     public bool weaponNotinHand = true;
+    [SerializeField] GameObject doorPanel;
     // Start is called before the first frame update
     void Start()
     {
@@ -80,5 +82,32 @@ public class WeaponTracker : MonoBehaviour
             }
 
         }
+
+        if(other.gameObject.tag == "door")
+        {
+            doorPanel.SetActive(true);
+        }
     }
+
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "door")
+        {
+            doorPanel.SetActive(false);
+        }
+    }
+
+
+    [PunRPC]
+
+    public void RemoveWeapon()
+    {
+        if (currentWeapon != null)
+        {
+            currentWeapon.SetActive(false);
+            currentWeapon = null;
+        }
+    }
+
 }

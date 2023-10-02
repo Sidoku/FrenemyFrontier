@@ -11,14 +11,14 @@ public class GotHold : MonoBehaviourPunCallbacks
     GameObject bountyHunter = null;
     public bool gotHold = false;
     public Vector3 jailPos;
-
+    int cvid;
 
     Vector3 offset = new Vector3(1f, 0f, -1f);
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
-
+        cvid = this.gameObject.GetComponent<PhotonView>().ViewID;
     }
 
     // Update is called once per frame
@@ -26,8 +26,10 @@ public class GotHold : MonoBehaviourPunCallbacks
     {
         if (Input.GetKeyUp(KeyCode.B) && photonView.IsMine)
         {
-            this.gameObject.GetComponent<PhotonView>().RPC("GotFree", RpcTarget.AllBuffered);
+            //this.gameObject.GetComponent<PhotonView>().RPC("GotFree", RpcTarget.AllBuffered);
         }
+
+      
 
 
     }
@@ -39,6 +41,8 @@ public class GotHold : MonoBehaviourPunCallbacks
         gotHold = false;
         anim.Play("GettingUnHold");
         StartCoroutine(ConfirmParticleDisable());
+        this.GetComponent<DamageControlCrim>().SetHealth(50);
+        //bountyHunter.GetComponent<CatchCrim>().gotCrim = false;
 
     }
 
@@ -53,7 +57,21 @@ public class GotHold : MonoBehaviourPunCallbacks
 
             gotHold = true;
             anim.SetBool("GotHold", gotHold);
+            StartCoroutine(GetFreeSoon());
+
+
+
+      
         }
+
+      
+
+        if(bountyHunter!= null)
+        {
+            bountyHunter.GetComponent<UpdateSlider>().MainReduce(cvid);
+        }
+      
+
     }
 
     [PunRPC]
@@ -65,7 +83,7 @@ public class GotHold : MonoBehaviourPunCallbacks
         anim.Play("GettingUnHold");
         StartCoroutine(ConfirmParticleDisable());
         this.transform.position = jailPos;
-        if (bountyHunter != null)
+        if (bountyHunter != null && photonView.IsMine)
         {
             bountyHunter.GetComponent<PhotonView>().RPC("SetBountyCollected", RpcTarget.AllBuffered, this.GetComponent<BountyAdded>().bountyAdded);
         }
@@ -73,7 +91,7 @@ public class GotHold : MonoBehaviourPunCallbacks
         StartCoroutine(CriminalCaluculations());
 
         StartCoroutine(RestFromJail());
-
+        //bountyHunter.GetComponent<CatchCrim>().gotCrim = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -82,6 +100,8 @@ public class GotHold : MonoBehaviourPunCallbacks
         {
 
             bountyHunter = other.gameObject.transform.root.gameObject;
+          
+           // bountyHunter.GetComponent<CatchCrim>().gotCrim = true;
             if (!gotHold)
             {
                 StartCoroutine(GetHold());
@@ -108,6 +128,7 @@ public class GotHold : MonoBehaviourPunCallbacks
 
         if (gotHold)
         {
+           
             if (photonView.IsMine)
             {
 
@@ -147,12 +168,14 @@ public class GotHold : MonoBehaviourPunCallbacks
     IEnumerator GetHold()
     {
         yield return new WaitForSeconds(0.2f);
-        this.gameObject.GetComponent<PhotonView>().RPC("OnCatch", RpcTarget.AllBuffered);
+        if (photonView.IsMine)
+            this.gameObject.GetComponent<PhotonView>().RPC("OnCatch", RpcTarget.AllBuffered);
     }
 
     IEnumerator RestFromJail()
     {
         yield return new WaitForSeconds(10f);
+
         this.gameObject.GetComponent<PhotonView>().RPC("ResetHealthSPwn", RpcTarget.AllBuffered);
     }
 
@@ -180,10 +203,29 @@ public class GotHold : MonoBehaviourPunCallbacks
     IEnumerator CriminalCaluculations()
     {
         yield return new WaitForSeconds(10f);
-        if (this.GetComponent<CoinsCollected>().coinsCollected >= 0)
+        if (this.GetComponent<CoinsCollected>().coinsCollected >= 0 && photonView.IsMine)
         {
             this.GetComponent<PhotonView>().RPC("LossCoins", RpcTarget.AllBuffered, (int)this.GetComponent<BountyAdded>().bountyAdded);
         }
-        this.GetComponent<PhotonView>().RPC("LossBounty", RpcTarget.AllBuffered);
+        if (photonView.IsMine)
+            this.GetComponent<PhotonView>().RPC("LossBounty", RpcTarget.AllBuffered);
     }
+
+
+    IEnumerator GetFreeSoon()
+    {
+        if(photonView.IsMine)
+        {
+            this.GetComponent<CrimUpdateSlider>().mainReduceSlider();
+        }
+      
+        yield return new WaitForSeconds(30f);
+        if(gotHold && photonView.IsMine)
+        {
+            this.gameObject.GetComponent<PhotonView>().RPC("GotFree", RpcTarget.AllBuffered);
+        }
+      
+    }
+
 }
+

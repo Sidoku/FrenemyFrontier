@@ -16,6 +16,7 @@ TagManager:
   - tressure
   - BH
   - CR
+  - door
   layers:
   - Default
   - TransparentFX

@@ -7,11 +7,12 @@ using TMPro;
 
 public class DamageControlBon : MonoBehaviourPunCallbacks
 {
-    private int Health = 100;
+    public int Health = 100;
     public TMP_Text healthtxt;
     public float attackCooldown = 0.2f;
     private bool canAttack = true;
     GameObject criminal;
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -62,8 +63,10 @@ public class DamageControlBon : MonoBehaviourPunCallbacks
                 criminal = other.gameObject.transform.root.gameObject;
                 Debug.Log("Attacked By " + criminal.name);
                 int vd = criminal.GetComponent<PhotonView>().ViewID;
-
-                this.gameObject.GetComponent<PhotonView>().RPC("OnDamageRecievedBon", RpcTarget.AllBuffered, weapon.GetComponent<WeaponDamage>().damage, vd);
+               
+                    this.gameObject.GetComponent<PhotonView>().RPC("OnDamageRecievedBon", RpcTarget.AllBuffered, weapon.GetComponent<WeaponDamage>().damage, vd);
+                
+               
 
             }
 
@@ -73,33 +76,46 @@ public class DamageControlBon : MonoBehaviourPunCallbacks
     [PunRPC]
     public void OnDamageRecievedBon(int damage,int vd)
     {
-        if (!photonView.IsMine)
+        if (photonView.IsMine)
         {
-            return;
+            this.gameObject.GetComponentInChildren<AnimationsManager>().GetHitAnim();
+            Health = Health - damage;
+
+            if (Health <= 0)
+            {
+                StartCoroutine(ResetSpawnAndHealth());
+
+                StartCoroutine(AddDeathBounty(vd));
+                
+               if( this.GetComponent<CatchCrim>().criminal != null)
+                {
+                    this.GetComponent<CatchCrim>().criminal.GetComponent<PhotonView>().RPC("GotFree", RpcTarget.AllBuffered);
+                }
+            }
+
+            healthtxt.text = "Health " + Health.ToString();
         }
 
-        this.gameObject.GetComponentInChildren<AnimationsManager>().GetHitAnim();
-        Health = Health - damage;
-
-        if (Health <= 0)
-        {
-            StartCoroutine(ResetSpawnAndHealth());
-
-            StartCoroutine(AddDeathBounty(vd));
-        }
-
-        healthtxt.text = "Health "  + Health.ToString();
+      
 
 
     }
 
     IEnumerator ResetSpawnAndHealth()
     {
-
+       if(this.GetComponent<CatchCrim>().criminal != null && this.GetComponent<CatchCrim>().gotCrim)
+        {
+            if(photonView.IsMine)
+            {
+                this.GetComponent<CatchCrim>().criminal.GetComponent<PhotonView>().RPC("GotFree",RpcTarget.AllBuffered);
+            }
+        }
         this.gameObject.transform.position = new Vector3(-5.532719612121582f, 1f, 119.69508361816406f);
         yield return new WaitForSeconds(1.5f);
         Health = 100;
         healthtxt.text = "Health " + Health.ToString();
+        this.GetComponent<PhotonView>().RPC("RemoveWeapon", RpcTarget.AllBuffered);
+
     }
 
     private IEnumerator ResetAttackCooldown()
@@ -115,7 +131,11 @@ public class DamageControlBon : MonoBehaviourPunCallbacks
     {
         yield return new WaitForSeconds(1f);
         PhotonView cr = PhotonView.Find(vd);
-        cr.RPC("SetBounty", RpcTarget.AllBuffered,10000);
+        if(photonView.IsMine)
+        {
+            cr.RPC("SetBounty", RpcTarget.AllBuffered, 10000);
+        }
+        
     }
 }
 

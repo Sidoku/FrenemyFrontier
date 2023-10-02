@@ -87,7 +87,10 @@ public class DamageControlCrim : MonoBehaviourPunCallbacks
                 Debug.Log("Attacked By " + bountyHunter.name);
                 int vd = bountyHunter.GetComponent<PhotonView>().ViewID;
                 //bountyHunter.GetComponent<PhotonView>().RPC("SetBountyCollected", RpcTarget.AllBuffered, this.GetComponent<BountyAdded>().bountyAdded);
-                this.gameObject.GetComponent<PhotonView>().RPC("OnDamageRecievedCrim", RpcTarget.AllBuffered, weapon.GetComponent<WeaponDamage>().damage,vd);
+               
+                    this.gameObject.GetComponent<PhotonView>().RPC("OnDamageRecievedCrim", RpcTarget.AllBuffered, weapon.GetComponent<WeaponDamage>().damage, vd);
+              
+     
                 
                 
 
@@ -102,31 +105,31 @@ public class DamageControlCrim : MonoBehaviourPunCallbacks
     public void OnDamageRecievedCrim(int damage,int vd)
     {
       
-        if (!photonView.IsMine)
+        if (photonView.IsMine)
         {
-            return;
-        }
-      
-        if(!onHold)
-        {
-            this.gameObject.GetComponentInChildren<AnimationsManager>().GetHitAnim();
-
-            Health = Health - damage;
-
-            if(Health <= 0)
+            if (!onHold)
             {
-                StartCoroutine(ResetSpawnAndHealth());
-                StartCoroutine(AddDeathBounty(vd));
-                if(this.GetComponent<CoinsCollected>().coinsCollected >= 0)
+                this.gameObject.GetComponentInChildren<AnimationsManager>().GetHitAnim();
+
+                Health = Health - damage;
+
+                if (Health <= 0)
                 {
-                    this.GetComponent<PhotonView>().RPC("LossCoins", RpcTarget.AllBuffered, (int)this.GetComponent<CoinsCollected>().coinsCollected / 2);
+                    StartCoroutine(ResetSpawnAndHealth());
+                    StartCoroutine(AddDeathBounty(vd));
+                    if (this.GetComponent<CoinsCollected>().coinsCollected >= 0 && photonView.IsMine)
+                    {
+                        this.GetComponent<PhotonView>().RPC("LossCoins", RpcTarget.AllBuffered, (int)this.GetComponent<CoinsCollected>().coinsCollected / 2);
+                    }
                 }
+
+
             }
 
-
-        }
-
             healthtxt.text = "Health " + Health.ToString();
+        }
+      
+       
    
         
       
@@ -140,10 +143,10 @@ public class DamageControlCrim : MonoBehaviourPunCallbacks
 
         this.gameObject.GetComponent<CriminalRespawn>().Respawn();
         yield return new WaitForSeconds(1.5f);
-        Health = 100;
-        healthtxt.text = "Health " + Health.ToString();
+        SetHealth(100);
         // exl.gameObject.GetComponent<PhotonView>().RPC("RemoveText", RpcTarget.AllBuffered);
-      
+        this.GetComponent<PhotonView>().RPC("RemoveWeapon", RpcTarget.AllBuffered);
+       
 
     }
 
@@ -159,8 +162,20 @@ public class DamageControlCrim : MonoBehaviourPunCallbacks
     {
         yield return new WaitForSeconds(1f);
         PhotonView bh = PhotonView.Find(vd);
-        bh.RPC("SetBountyCollected", RpcTarget.AllBuffered,(int)this.GetComponent<BountyAdded>().bountyAdded/2);
+        if(photonView.IsMine)
+        {
+            bh.RPC("SetBountyCollected", RpcTarget.AllBuffered, (int)this.GetComponent<BountyAdded>().bountyAdded / 2);
+        }
+      
     }
+
+    public void SetHealth(int health)
+    {
+        Health = health;
+        healthtxt.text = "Health " + Health.ToString();
+    }
+
+    
   
 
 }

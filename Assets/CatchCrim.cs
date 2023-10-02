@@ -8,9 +8,9 @@ public class CatchCrim : MonoBehaviourPunCallbacks
 {
     public LayerMask layer;
     bool inTrigger = false;
-    GameObject criminal = null;
+    public GameObject criminal = null;
     Animator anim;
-    public bool gotHold;
+    public bool gotCrim;
     //public TMP_Text HelpUI;
    
     // Start is called before the first frame update
@@ -34,56 +34,59 @@ public class CatchCrim : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        Collider[] criminals = Physics.OverlapSphere(this.transform.position, 10f, layer);
+        //Collider[] criminals = Physics.OverlapSphere(this.transform.position, 10f, layer);
 
-        if(criminals.Length > 0)
-        {
-            
-            foreach(Collider c in criminals)
-            {
-               
-                
+        //if(criminals.Length > 0)
+        //{
 
-                    criminal = c.gameObject;
-                    inTrigger = true;
+        //    foreach(Collider c in criminals)
+        //    {
 
-                
-              
-            }
-        }
-        else
-        {
-            inTrigger = false;
-            criminal = null;
-        }
+
+
+        //            criminal = c.gameObject;
+        //            inTrigger = true;
+
+
+
+        //    }
+        //}
+        //else
+        //{
+        //    inTrigger = false;
+        //    criminal = null;
+        //}
+
+
+
+        //if (inTrigger)
+        //{
+
+
+        //    if (Input.GetKeyDown(KeyCode.F) && photonView.IsMine)
+        //    {
+        //        if (this.gameObject.GetComponent<WeaponTracker>().currentWeapon != null)
+        //           StartCoroutine(WeaponControl());
+
+
+        //        if(criminal != null)
+        //        {
+        //            this.transform.LookAt(criminal.transform.position);
+        //            anim.Play("Catch");
+        //            StartCoroutine(ConfirmPartcleDiable());
+
+        //            this.GetComponentInChildren<AnimationsManager>().isAttacking = true;
+        //            gotCrim= true;
+        //            //criminal.GetComponent<PhotonView>().RPC("OnCatch", RpcTarget.AllBuffered);
+        //        }
+
+        //    }
+        //}
+
 
        
 
-        if (inTrigger)
-        {
-            
-          
-            if (Input.GetKeyDown(KeyCode.F) && photonView.IsMine)
-            {
-                if (this.gameObject.GetComponent<WeaponTracker>().currentWeapon != null)
-                   StartCoroutine(WeaponControl());
-                 
-                 
-                if(criminal != null)
-                {
-                    this.transform.LookAt(criminal.transform.position);
-                    anim.Play("Catch");
-                    StartCoroutine(ConfirmPartcleDiable());
-                    
-                    this.GetComponentInChildren<AnimationsManager>().isAttacking = true;
-                    gotHold = true;
-                    //criminal.GetComponent<PhotonView>().RPC("OnCatch", RpcTarget.AllBuffered);
-                }
-                  
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.F) && photonView.IsMine)
+        if (Input.GetKeyDown(KeyCode.F) && photonView.IsMine && gotCrim == false)
         {
             if (this.gameObject.GetComponent<WeaponTracker>().currentWeapon != null)
                 StartCoroutine(WeaponControl());
@@ -95,7 +98,7 @@ public class CatchCrim : MonoBehaviourPunCallbacks
 
         }
 
-
+       
     }
 
     /*
@@ -110,7 +113,17 @@ public class CatchCrim : MonoBehaviourPunCallbacks
 
     */
 
-    
+    [PunRPC]
+    public void SetCriminal(int vid)
+    {
+        if(photonView.IsMine)
+        {
+            gotCrim = true;
+            PhotonView cr = PhotonView.Find(vid);
+            criminal = cr.gameObject;
+        }
+   
+    }
 
     IEnumerator WeaponControl()
     {

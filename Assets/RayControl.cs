@@ -20,6 +20,8 @@ public class RayControl : MonoBehaviourPunCallbacks
     {
         //ray.gameObject.transform.rotation = Quaternion.Euler(0f, this.transform.rotation.y, 0f);
     }
+
+    [PunRPC]
     public void RayActivate()
     {
         
@@ -27,13 +29,13 @@ public class RayControl : MonoBehaviourPunCallbacks
        // ps.ActivateParticleSystems();
         ray.GetComponent<Hovl_Laser>().MaxLength = 0f;
     }
-
+    [PunRPC]
     public void IncreaseLenght()
     {
       
         ray.GetComponent<Hovl_Laser>().MaxLength = 10f;
     }
-
+    [PunRPC]
     public void RayDeactivate()
     {
         

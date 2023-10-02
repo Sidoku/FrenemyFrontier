@@ -60,6 +60,16 @@ MonoBehaviour:
   - LossCoins
   - LossBounty
   - CalculateAllValues
+  - DisableParticleSystems
+  - EnableParticleSystems
+  - IncreaseLenght
+  - RayActivate
+  - RayDeactivate
+  - RemoveWeapon
+  - ReduceSlider
+  - MainReduce
+  - SetCriminal
+  - CrimReduceSlider
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
