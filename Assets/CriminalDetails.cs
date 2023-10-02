@@ -82,14 +82,5 @@ public class CriminalDetails : MonoBehaviourPunCallbacks
         {
             Console.WriteLine(e.Message);
         }
-
-        
-
-       
-
-
-      
-
-    
     }
 }

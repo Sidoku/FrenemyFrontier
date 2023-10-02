@@ -4,23 +4,9 @@ using UnityEngine;
 using Photon.Pun;
 
 public class EarningCoins : MonoBehaviourPunCallbacks
-{
-    // Start is called before the first frame update
-    void Start()
+{ 
+    public void EarnCoins()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.tag == "tressure")
-        {
             if(photonView.IsMine)
             {
                 this.GetComponent<PhotonView>().RPC("SetCoins", RpcTarget.AllBuffered, 5000);
@@ -28,6 +14,5 @@ public class EarningCoins : MonoBehaviourPunCallbacks
                 this.GetComponent<PhotonView>().RPC("BountyPlusCR", RpcTarget.AllBuffered, 1000);
                 this.GetComponent<PhotonView>().RPC("CoinsPlusCR", RpcTarget.AllBuffered, 5000);
             }
-        }
     }
 }
