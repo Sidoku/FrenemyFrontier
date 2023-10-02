@@ -9,14 +9,15 @@ using UnityEngine.Rendering.UI;
 public class TaskInteraction : MonoBehaviour
 {
    private float _timer = 0.0f;
-   private bool _isTimerStarted = false;
+   public bool _isTimerStarted = false;
    private IEnumerator _taskTimer;
-   private bool _isTaskCompleted = false;
+   public bool _isTaskCompleted = false;
    private EarningCoins earnCoins;
-
+   
    public TaskSpawner taskSpawner;
     // Update is called once per frame
 
+    
     private void Start()
     {
         taskSpawner = GetComponent<TaskSpawner>();
