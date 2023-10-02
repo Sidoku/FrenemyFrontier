@@ -12,6 +12,8 @@ public class GotHold : MonoBehaviourPunCallbacks
     public bool gotHold = false;
     public Vector3 jailPos;
     int cvid;
+    public AudioSource getiingHoldSound;
+    public AudioSource getiingFreeSound;
 
     Vector3 offset = new Vector3(1f, 0f, -1f);
     // Start is called before the first frame update
@@ -38,12 +40,15 @@ public class GotHold : MonoBehaviourPunCallbacks
 
     public void GotFree()
     {
+
         gotHold = false;
+        getiingHoldSound.Stop();
         anim.Play("GettingUnHold");
+        getiingFreeSound.Play();
         StartCoroutine(ConfirmParticleDisable());
         this.GetComponent<DamageControlCrim>().SetHealth(50);
         //bountyHunter.GetComponent<CatchCrim>().gotCrim = false;
-
+        
     }
 
     [PunRPC]
@@ -57,6 +62,7 @@ public class GotHold : MonoBehaviourPunCallbacks
 
             gotHold = true;
             anim.SetBool("GotHold", gotHold);
+            getiingHoldSound.Play();
             StartCoroutine(GetFreeSoon());
 
 
@@ -80,12 +86,14 @@ public class GotHold : MonoBehaviourPunCallbacks
     {
 
         gotHold = false;
+        getiingHoldSound.Stop();
         anim.Play("GettingUnHold");
         StartCoroutine(ConfirmParticleDisable());
         this.transform.position = jailPos;
         if (bountyHunter != null && photonView.IsMine)
         {
             bountyHunter.GetComponent<PhotonView>().RPC("SetBountyCollected", RpcTarget.AllBuffered, this.GetComponent<BountyAdded>().bountyAdded);
+            bountyHunter.GetComponent<PhotonView>().RPC("BountyPlusBH", RpcTarget.AllBuffered, this.GetComponent<BountyAdded>().bountyAdded);
         }
 
         StartCoroutine(CriminalCaluculations());
@@ -206,6 +214,7 @@ public class GotHold : MonoBehaviourPunCallbacks
         if (this.GetComponent<CoinsCollected>().coinsCollected >= 0 && photonView.IsMine)
         {
             this.GetComponent<PhotonView>().RPC("LossCoins", RpcTarget.AllBuffered, (int)this.GetComponent<BountyAdded>().bountyAdded);
+            this.GetComponent<PhotonView>().RPC("CoinsLossCR", RpcTarget.AllBuffered, (int)this.GetComponent<BountyAdded>().bountyAdded);
         }
         if (photonView.IsMine)
             this.GetComponent<PhotonView>().RPC("LossBounty", RpcTarget.AllBuffered);

@@ -158,6 +158,7 @@ MonoBehaviour:
   playerPrefabs:
   - {fileID: 1310464435797045970, guid: 4725edf0bf6238a4faed9e030295667f, type: 3}
   - {fileID: 7941396485750748694, guid: 1fc9bc4af4870c44887df3405bc26460, type: 3}
+  pingSpawnPoint: {fileID: 0}
   bountyHunterSpawnPoint: {fileID: 570398125}
   CriminalSpawnPoint: {fileID: 247383085}
 --- !u!4 &60544676
@@ -382,6 +383,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxTime: 300
   timerText: {fileID: 490333916}
+  abouttoEnd: 0
 --- !u!1 &542508511
 GameObject:
   m_ObjectHideFlags: 0

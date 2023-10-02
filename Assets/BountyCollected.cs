@@ -16,6 +16,9 @@ public class BountyCollected : MonoBehaviourPunCallbacks
     Timer timer;
     bool doneCal = false;
     [SerializeField] GameObject endgamePanel;
+    public GameObject killed;
+    public TMP_Text BountyPlus;
+    public AudioSource BountyCollectedSound;
     public int bountyCollected
     {
         get => _bountyCollected;
@@ -57,6 +60,20 @@ public class BountyCollected : MonoBehaviourPunCallbacks
    
     }
 
+    [PunRPC]
+    public void KillAckBH()
+    {
+        StartCoroutine(BHShowKill());
+
+        // PhotonNetwork.LocalPlayer.SetScore(this.bountyCollected);
+
+    }
+    [PunRPC] 
+    public void BountyPlusBH(int bounty)
+    {
+        StartCoroutine(BHShowBounty(bounty));
+    }
+
     public void NetworkSetBounty()
     {
         if(photonView.IsMine)
@@ -66,5 +83,22 @@ public class BountyCollected : MonoBehaviourPunCallbacks
         }
 
 
+    }
+
+    IEnumerator BHShowKill()
+    {
+       killed.SetActive(true);
+        yield return new WaitForSeconds(2f);
+       killed.SetActive(false);
+    }
+
+    IEnumerator BHShowBounty(int bounty)
+    {
+        //BountyPlus.gameObject.SetActive(true);
+        BountyPlus.text = "BountyCollected + " + bounty.ToString();
+        BountyCollectedSound.Play();
+        yield return new WaitForSeconds(2f);
+        BountyPlus.text = " ";
+        //BountyPlus.gameObject.SetActive(false);
     }
 }

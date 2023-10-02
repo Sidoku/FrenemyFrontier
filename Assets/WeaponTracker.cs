@@ -10,6 +10,7 @@ public class WeaponTracker : MonoBehaviourPunCallbacks
     public Collider weaponCollider;
     public bool weaponNotinHand = true;
     [SerializeField] GameObject doorPanel;
+    public AudioSource weaponPickupSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -81,6 +82,8 @@ public class WeaponTracker : MonoBehaviourPunCallbacks
                 currentWeapon.SetActive(true);
             }
 
+            Destroy(other.gameObject);
+            weaponPickupSound.Play();
         }
 
         if(other.gameObject.tag == "door")

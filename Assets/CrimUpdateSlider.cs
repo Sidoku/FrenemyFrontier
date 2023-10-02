@@ -22,11 +22,12 @@ public class CrimUpdateSlider : MonoBehaviourPunCallbacks
 
     public void mainReduceSlider()
     {
-        this.GetComponent<PhotonView>().RPC("CrimReduceSlider", RpcTarget.AllBuffered);
+        //this.GetComponent<PhotonView>().RPC("CrimReduceSlider", RpcTarget.AllBuffered);
+        CrimReduceSlider();
     }
 
 
-    [PunRPC]
+    //[PunRPC]
     public void CrimReduceSlider()
     {
         if (photonView.IsMine)

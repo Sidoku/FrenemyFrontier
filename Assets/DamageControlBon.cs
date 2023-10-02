@@ -87,7 +87,7 @@ public class DamageControlBon : MonoBehaviourPunCallbacks
 
                 StartCoroutine(AddDeathBounty(vd));
                 
-               if( this.GetComponent<CatchCrim>().criminal != null)
+               if( this.GetComponent<CatchCrim>().criminal != null && this.GetComponent<CatchCrim>().gotCrim)
                 {
                     this.GetComponent<CatchCrim>().criminal.GetComponent<PhotonView>().RPC("GotFree", RpcTarget.AllBuffered);
                 }
@@ -129,11 +129,14 @@ public class DamageControlBon : MonoBehaviourPunCallbacks
 
     IEnumerator AddDeathBounty(int vd)
     {
-        yield return new WaitForSeconds(1f);
         PhotonView cr = PhotonView.Find(vd);
+        cr.RPC("KillAckCR", RpcTarget.AllBuffered);
+        yield return new WaitForSeconds(1f);
+       
         if(photonView.IsMine)
         {
             cr.RPC("SetBounty", RpcTarget.AllBuffered, 10000);
+            cr.RPC("BountyPlusCR", RpcTarget.AllBuffered, 10000);
         }
         
     }

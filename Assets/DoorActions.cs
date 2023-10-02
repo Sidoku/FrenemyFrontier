@@ -8,6 +8,7 @@ public class DoorActions : MonoBehaviour
 
     Animator anim;
     bool endtereddoor = false;
+    public AudioSource doorOpenSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,10 +25,12 @@ public class DoorActions : MonoBehaviour
             if (anim.GetBool("DoorOpen"))
             {
                 anim.SetBool("DoorOpen", false);
+                doorOpenSound.Play();
             }
             else
             {
                 anim.SetBool("DoorOpen", true);
+                doorOpenSound.Play();
                 Debug.Log("OpenDoor");
             }
 

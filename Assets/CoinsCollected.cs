@@ -16,7 +16,10 @@ public class CoinsCollected : MonoBehaviourPunCallbacks
     Timer timer;
     bool doneCal = false;
     [SerializeField] GameObject endgamePanel;
-
+    public TMP_Text coinsPlus;
+    public TMP_Text coinsLoss;
+    public AudioSource coinsAddedSound;
+    public AudioSource coinsLossSound;
     public int coinsCollected
     {
         get => _coinsCollected;
@@ -58,6 +61,19 @@ public class CoinsCollected : MonoBehaviourPunCallbacks
     
     }
 
+
+    [PunRPC]
+    public void CoinsPlusCR(int coins)
+    {
+        StartCoroutine(CRShowCoinsplus(coins));
+    }
+
+    [PunRPC]
+    public void CoinsLossCR(int coins)
+    {
+        StartCoroutine(CRShowCoinsloss(coins));
+    }
+
     [PunRPC]
     public void LossCoins(int coins)
     {
@@ -79,5 +95,26 @@ public class CoinsCollected : MonoBehaviourPunCallbacks
         }
 
         
+    }
+
+    IEnumerator CRShowCoinsplus(int coins)
+    {
+
+        coinsPlus.text = "Coins Added + " + coins.ToString();
+        coinsAddedSound.Play();
+        yield return new WaitForSeconds(2f);
+        coinsPlus.text = " ";
+
+    }
+
+
+    IEnumerator CRShowCoinsloss(int coins)
+    {
+
+        coinsPlus.text = "Coins Removed - " + coins.ToString();
+        coinsLossSound.Play();
+        yield return new WaitForSeconds(2f);
+        coinsPlus.text = " ";
+
     }
 }

@@ -9,7 +9,7 @@ public class UpdateSlider : MonoBehaviourPunCallbacks
     public Slider slider;
     private float currentValue;
     GameObject criminal;
-
+    bool releasedbyjail = false;
 
     void Start()
     {
@@ -27,7 +27,7 @@ public class UpdateSlider : MonoBehaviourPunCallbacks
     {
         this.gameObject.GetComponent<PhotonView>().RPC("SetCriminal", RpcTarget.AllBuffered,vid);
         this.gameObject.GetComponent<PhotonView>().RPC("ReduceSlider", RpcTarget.AllBuffered);
-    
+        //ReduceSlider();  
         
     }
 
@@ -55,7 +55,17 @@ public class UpdateSlider : MonoBehaviourPunCallbacks
                 // Update the slider value
                 slider.value = currentValue;
 
-               if(this.GetComponent<DamageControlBon>().Health <= 0)
+                if (releasedbyjail)
+                {
+                    currentValue = slider.maxValue;
+                    slider.value = currentValue;
+                    slider.gameObject.SetActive(false);
+                    this.gameObject.GetComponent<CatchCrim>().gotCrim = false;
+                    releasedbyjail=false;
+                    break;
+                }
+
+                if (this.GetComponent<DamageControlBon>().Health <= 0)
                 {
                     currentValue = slider.maxValue;
                     slider.value = currentValue;
@@ -77,5 +87,22 @@ public class UpdateSlider : MonoBehaviourPunCallbacks
             }
         }
         
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "jail")
+        {
+            releasedbyjail= true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "jail")
+        {
+            releasedbyjail = false;
+        }
     }
 }

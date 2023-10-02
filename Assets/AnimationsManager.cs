@@ -13,6 +13,8 @@ public class AnimationsManager : MonoBehaviourPunCallbacks
     public bool isAttacking = true;
     int currentIntex = -1;
     public bool onHold = false;
+    public AudioSource audioSourceSword;
+    public AudioSource audioSourceGethit;
 
     void Start()
     {
@@ -31,6 +33,7 @@ public class AnimationsManager : MonoBehaviourPunCallbacks
                 {
                     anim.Play(attackAnimationNames[0]);
                     isAttacking = false;
+                    audioSourceSword.Play();
                 }
 
                 currentIntex++;
@@ -53,6 +56,7 @@ public class AnimationsManager : MonoBehaviourPunCallbacks
     {
         anim.Play("GetHit");
         isAttacking = true;
+        audioSourceGethit.Play();
     }
 
     public void OnComboAttackAnimationFinished()
@@ -84,6 +88,7 @@ public class AnimationsManager : MonoBehaviourPunCallbacks
             {
                 currentIntex = comboIndex;
                 anim.Play(attackAnimationNames[comboIndex]);
+                audioSourceSword.Play();
             }
                  
                

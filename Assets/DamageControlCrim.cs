@@ -120,6 +120,7 @@ public class DamageControlCrim : MonoBehaviourPunCallbacks
                     if (this.GetComponent<CoinsCollected>().coinsCollected >= 0 && photonView.IsMine)
                     {
                         this.GetComponent<PhotonView>().RPC("LossCoins", RpcTarget.AllBuffered, (int)this.GetComponent<CoinsCollected>().coinsCollected / 2);
+                        this.GetComponent<PhotonView>().RPC("CoinsLossCR", RpcTarget.AllBuffered, (int)this.GetComponent<CoinsCollected>().coinsCollected / 2);
                     }
                 }
 
@@ -160,11 +161,19 @@ public class DamageControlCrim : MonoBehaviourPunCallbacks
 
     IEnumerator AddDeathBounty(int vd)
     {
-        yield return new WaitForSeconds(1f);
         PhotonView bh = PhotonView.Find(vd);
+        if (photonView.IsMine)
+        {
+            bh.RPC("KillAckBH", RpcTarget.AllBuffered);
+         
+        }
+        yield return new WaitForSeconds(1f);
+       
         if(photonView.IsMine)
         {
+           
             bh.RPC("SetBountyCollected", RpcTarget.AllBuffered, (int)this.GetComponent<BountyAdded>().bountyAdded / 2);
+            bh.RPC("BountyPlusBH", RpcTarget.AllBuffered, (int)this.GetComponent<BountyAdded>().bountyAdded / 2);
         }
       
     }

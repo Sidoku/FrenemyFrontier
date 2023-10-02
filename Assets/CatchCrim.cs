@@ -11,6 +11,7 @@ public class CatchCrim : MonoBehaviourPunCallbacks
     public GameObject criminal = null;
     Animator anim;
     public bool gotCrim;
+    public AudioSource kamehamehaSound;
     //public TMP_Text HelpUI;
    
     // Start is called before the first frame update
@@ -92,6 +93,7 @@ public class CatchCrim : MonoBehaviourPunCallbacks
                 StartCoroutine(WeaponControl());
             //this.transform.LookAt(criminal.transform.position);
             anim.Play("Catch");
+            kamehamehaSound.Play();
             StartCoroutine(ConfirmPartcleDiable());
             this.GetComponentInChildren<AnimationsManager>().isAttacking= true;
             
