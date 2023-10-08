@@ -44,22 +44,7 @@ public class AnimationsManager : MonoBehaviourPunCallbacks
         }
 
 
-        if(photonView.IsMine)
-        {
-            if(this.GetComponent<TaskInteraction>() != null)
-            {
-                if (this.GetComponent<TaskInteraction>()._isTimerStarted)
-                {
-                    anim.Play("Task");
-                }
-
-                if (this.GetComponent<TaskInteraction>()._isTaskCompleted)
-                {
-                    anim.SetBool("isTaskCompleted", true);
-                }
-            }
-        
-        }
+       
 
 
 
@@ -122,5 +107,7 @@ public class AnimationsManager : MonoBehaviourPunCallbacks
     }
 
   
+
+
 
 }

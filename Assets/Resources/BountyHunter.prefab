@@ -512,7 +512,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.41752145, y: 0.10440281}
   m_AnchorMax: {x: 0.586, y: 0.39400002}
-  m_AnchoredPosition: {x: -1.0710449, y: 0.02999878}
+  m_AnchoredPosition: {x: -1.0710449, y: 0.030029297}
   m_SizeDelta: {x: 1.1120911, y: 3.112091}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5067776697878877794
@@ -1913,6 +1913,16 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3305696653112502523, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1.088
+      objectReference: {fileID: 0}
+    - target: {fileID: 3305696653112502523, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.54403687
+      objectReference: {fileID: 0}
     - target: {fileID: 3328276002360598354, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}
       propertyPath: m_Layer
@@ -1992,6 +2002,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3729576847600163026, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 26.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 3729576847600163026, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
+        type: 3}
+      propertyPath: m_margin.z
+      value: -0.15093994
+      objectReference: {fileID: 0}
+    - target: {fileID: 3851525245939043272, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
+        type: 3}
+      propertyPath: damage
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3862357008530399292, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}
@@ -2623,6 +2648,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 7429625812854512857, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
+        type: 3}
+      propertyPath: damage
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7463685876514911482, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}
       propertyPath: m_Layer
@@ -2941,7 +2971,7 @@ PrefabInstance:
     - target: {fileID: 8760535921277469267, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.2999878
+      value: 1.3000488
       objectReference: {fileID: 0}
     - target: {fileID: 8798305985539955035, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}

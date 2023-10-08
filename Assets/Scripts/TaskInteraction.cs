@@ -5,16 +5,21 @@ using StarterAssets;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Rendering.UI;
+using Photon.Pun;
+using TMPro;
 
-public class TaskInteraction : MonoBehaviour
+public class TaskInteraction : MonoBehaviourPunCallbacks
 {
-   private float _timer = 0.0f;
+   private float _timer = 10.0f;
    public bool _isTimerStarted = false;
    private IEnumerator _taskTimer;
    public bool _isTaskCompleted = false;
    private EarningCoins earnCoins;
-   
-   public TaskSpawner taskSpawner;
+    [SerializeField] GameObject closedTressure;
+    [SerializeField] GameObject OpenedTressure;
+    public TaskSpawner taskSpawner;
+    GameObject currentCrim;
+    [SerializeField] TMP_Text timertext;
     // Update is called once per frame
 
     
@@ -25,18 +30,27 @@ public class TaskInteraction : MonoBehaviour
 
     void Update()
     {
+       
         if (_isTimerStarted)
         {
-            _timer += Time.deltaTime;
+            _timer -= Time.deltaTime;
+        
         }
 
-        if (_timer > 10f)
+        if (_timer <= 0f)
         {
             Debug.LogWarning("Task completed");
             ResetTimer();
-            earnCoins.EarnCoins();
-            taskSpawner.TaskRespawn(gameObject);
+            //StartCoroutine(EarncoinsAnDChangeLocation());
+            if(photonView.IsMine)
+            {
+                earnCoins.EarnCoins();
+                
+            }
+            taskSpawner.GetComponent<PhotonView>().RPC("TaskRespawn", RpcTarget.AllBuffered);
         }
+
+        timertext.text = _timer.ToString();
     }
     private void OnTriggerStay(Collider other)
     {
@@ -45,10 +59,19 @@ public class TaskInteraction : MonoBehaviour
 
         if (other.gameObject.CompareTag("CR") && Input.GetKey(KeyCode.E))
         {
+            currentCrim = other.gameObject;
             other.gameObject.GetComponent<ThirdPersonController>().onHold = true;
-           //Debug.LogWarning("Timer is running");
+            other.gameObject.GetComponentInChildren<AnimationsManager>().anim.Play("Task");
+            //Debug.LogWarning("Timer is running");
             if (!_isTimerStarted)
-            _isTimerStarted = true;
+            {
+                //timertext.transform.LookAt(other.transform.FindRecursively("PlayerCamera").position);
+                _isTimerStarted = true;
+                closedTressure.SetActive(false);
+                OpenedTressure.SetActive(true);
+            }
+            // _isTimerStarted = true;
+           
             earnCoins = other.gameObject.GetComponent<EarningCoins>();
         }
         else
@@ -71,7 +94,15 @@ public class TaskInteraction : MonoBehaviour
    private void ResetTimer()
    {
        _isTimerStarted = false;
-       _timer = 0.0f;
+        closedTressure.SetActive(true);
+        OpenedTressure.SetActive(false);
+        _timer = 10.0f;
    }
    
+    IEnumerator EarncoinsAnDChangeLocation()
+    {
+        yield return new WaitForSeconds(2f);
+       
+    }
+
 }

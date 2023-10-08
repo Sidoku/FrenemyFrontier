@@ -90,6 +90,8 @@ public class WeaponTracker : MonoBehaviourPunCallbacks
         {
             doorPanel.SetActive(true);
         }
+
+       
     }
 
 

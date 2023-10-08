@@ -12,7 +12,10 @@ public class AimCriminal : MonoBehaviourPunCallbacks
 
     
     private GameObject Ping;
+    private GameObject PingForEnemy;
     public GameObject childping;
+    public GameObject childpingForEnemy;
+    private bool useEnemyPing = false;
 
     // Start is called before the first frame update
     void Start()
@@ -20,12 +23,16 @@ public class AimCriminal : MonoBehaviourPunCallbacks
         Ping = childping;
         childping.transform.position = new Vector3(0f, 0f, 0f);
         childping.transform.parent = null;
-        
+
+        PingForEnemy = childpingForEnemy;
+        childpingForEnemy.transform.position = new Vector3(0f, 0f, 0f);
+        childpingForEnemy.transform.parent = null;
     }
 
     // Update is called once per frame
     void Update()
     {
+        TogglePing();
         AimC();
     }
 
@@ -34,15 +41,38 @@ public class AimCriminal : MonoBehaviourPunCallbacks
     {
        if(photonView.IsMine)
         {
-            if (Input.GetMouseButtonDown(2) && this.GetComponent<ThirdPersonController>().isAiming)
+            if (!useEnemyPing)
             {
-                //PingSystem.AddPing(mouseWorldPosition);
-                Ping.transform.position = this.GetComponent<ThirdPersonController>().mouseWorldPosition;
+                if (Input.GetMouseButtonDown(2) && this.GetComponent<ThirdPersonController>().isAiming)
+                {
+                    //PingSystem.AddPing(mouseWorldPosition);
+                    Ping.transform.position = this.GetComponent<ThirdPersonController>().mouseWorldPosition;
+
+                }
 
             }
+            else
+            {
+                if (Input.GetMouseButtonDown(2) && this.GetComponent<ThirdPersonController>().isAiming)
+                {
+                    //PingSystem.AddPing(mouseWorldPosition);
+                    PingForEnemy.transform.position = this.GetComponent<ThirdPersonController>().mouseWorldPosition;
+
+                }
+
+            }
+
         }
 
       
+    }
+
+    private void TogglePing()
+    {
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            useEnemyPing = !useEnemyPing;
+        }
     }
 
 

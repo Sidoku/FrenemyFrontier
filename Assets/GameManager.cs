@@ -15,8 +15,11 @@ public class GameManager : MonoBehaviourPunCallbacks
     public Transform pingSpawnPoint;
     public Transform bountyHunterSpawnPoint;
     public Transform CriminalSpawnPoint;
-   // public Transform PingSpawnPoint;
-
+    public Transform initialTressureSpawnPoint;
+    public Transform initialTressure2SpawnPoint;
+    // public Transform PingSpawnPoint;
+    public GameObject Task;
+    public GameObject Task2;
     public static GameManager instance;
 
     // Start is called before the first frame update
@@ -39,7 +42,8 @@ public class GameManager : MonoBehaviourPunCallbacks
             GameObject CriminalPlayer = PhotonNetwork.Instantiate(playerToSpawn.name, CriminalSpawnPoint.position, Quaternion.identity);
             CriminalPlayer.GetComponent<PhotonView>().RPC("UpdatePlayerLooks", RpcTarget.AllBuffered, playerAvatar);
         }
-
+        PhotonNetwork.Instantiate(Task.name, initialTressureSpawnPoint.position, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate(Task2.name, initialTressure2SpawnPoint.position, Quaternion.identity, 0);
         //PhotonNetwork.InstantiateRoomObject(pfPingWorldB.name, pingSpawnPoint.position + new Vector3(1f,0,0), Quaternion.identity);
         //PhotonNetwork.InstantiateRoomObject(pfPingWorldC.name, pingSpawnPoint.position, Quaternion.identity);
     }

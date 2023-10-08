@@ -806,7 +806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd1355714dd0ef4ab828346f07e4409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 15
 --- !u!1 &483326043364917619
 GameObject:
   m_ObjectHideFlags: 0
@@ -1547,7 +1547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd1355714dd0ef4ab828346f07e4409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 10
 --- !u!1 &1010870105026582983
 GameObject:
   m_ObjectHideFlags: 0
@@ -1781,7 +1781,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.00931579}
   m_AnchorMax: {x: 0.1867424, y: 0.10177123}
-  m_AnchoredPosition: {x: 7.499634, y: 1.2999878}
+  m_AnchoredPosition: {x: 7.499634, y: 1.3000488}
   m_SizeDelta: {x: -15.000583, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8473047968755969840
@@ -2094,7 +2094,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd1355714dd0ef4ab828346f07e4409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 12
 --- !u!1 &1234187136511326529
 GameObject:
   m_ObjectHideFlags: 0
@@ -2275,10 +2275,10 @@ RectTransform:
   m_Father: {fileID: 336217470089994385}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.14639477}
-  m_AnchorMax: {x: 0.95000005, y: 0.8263948}
-  m_AnchoredPosition: {x: -166.4119, y: 1}
-  m_SizeDelta: {x: 44.3761, y: 0}
+  m_AnchorMin: {x: 0.019274257, y: 0.14639477}
+  m_AnchorMax: {x: 0.98300004, y: 0.80200005}
+  m_AnchoredPosition: {x: -72.4, y: 1}
+  m_SizeDelta: {x: -142.6239, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8663925866742610063
 CanvasRenderer:
@@ -2335,7 +2335,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 29.25
+  m_fontSize: 26.85
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2715,13 +2715,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.64
+  m_Height: 1.4
   m_Radius: 0.39761475
   m_SlopeLimit: 45
   m_StepOffset: 0.25
   m_SkinWidth: 0.02
   m_MinMoveDistance: 0
-  m_Center: {x: 0, y: 0.82, z: 0}
+  m_Center: {x: 0, y: 0.71, z: 0}
 --- !u!114 &1463440373542905662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4965,7 +4965,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd1355714dd0ef4ab828346f07e4409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 15
 --- !u!1 &2082732593003105118
 GameObject:
   m_ObjectHideFlags: 0
@@ -6600,7 +6600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd1355714dd0ef4ab828346f07e4409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 15
 --- !u!1 &2884296277945288295
 GameObject:
   m_ObjectHideFlags: 0
@@ -6926,7 +6926,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd1355714dd0ef4ab828346f07e4409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 17
 --- !u!1 &2958217376573117268
 GameObject:
   m_ObjectHideFlags: 0
@@ -7230,7 +7230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd1355714dd0ef4ab828346f07e4409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 10
 --- !u!1 &3125989174593606156
 GameObject:
   m_ObjectHideFlags: 0
@@ -8050,7 +8050,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd1355714dd0ef4ab828346f07e4409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 15
+  damage: 10
 --- !u!1 &3360636252976949950
 GameObject:
   m_ObjectHideFlags: 0
@@ -8460,7 +8460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd1355714dd0ef4ab828346f07e4409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 15
 --- !u!1 &3629301023291885591
 GameObject:
   m_ObjectHideFlags: 0
@@ -9042,7 +9042,7 @@ GameObject:
   - component: {fileID: 1626130681656673512}
   - component: {fileID: 121218797144530113}
   m_Layer: 16
-  m_Name: d
+  m_Name: PlayerMarker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9057,7 +9057,7 @@ Transform:
   m_GameObject: {fileID: 3886132189408961811}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0.06581247, y: 53.2, z: 0.078694105}
-  m_LocalScale: {x: 4.529664, y: 4.529664, z: 4.529664}
+  m_LocalScale: {x: 2.514455, y: 6.0889583, z: 4.529664}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2235192689199758735}
@@ -9852,7 +9852,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd1355714dd0ef4ab828346f07e4409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 8
 --- !u!1 &4363146049094768330
 GameObject:
   m_ObjectHideFlags: 0
@@ -12567,10 +12567,10 @@ RectTransform:
   m_Father: {fileID: 3721983129587729846}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.40613356, y: 0.46600002}
+  m_AnchorMin: {x: 0.40765715, y: 0.46600002}
   m_AnchorMax: {x: 0.5918562, y: 0.5317529}
-  m_AnchoredPosition: {x: 2.5, y: 0.5}
-  m_SizeDelta: {x: -3.1175537, y: -2.4989014}
+  m_AnchoredPosition: {x: 1, y: 0.5}
+  m_SizeDelta: {x: -0.11755371, y: -2.4989014}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6851484201856954238
 CanvasRenderer:
@@ -13051,7 +13051,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd1355714dd0ef4ab828346f07e4409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 10
 --- !u!1 &5271731393203278614
 GameObject:
   m_ObjectHideFlags: 0
@@ -14629,7 +14629,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd1355714dd0ef4ab828346f07e4409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 15
 --- !u!1 &5812391756233722264
 GameObject:
   m_ObjectHideFlags: 0
@@ -14789,7 +14789,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd1355714dd0ef4ab828346f07e4409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 15
 --- !u!1 &5892397067885849278
 GameObject:
   m_ObjectHideFlags: 0
@@ -15342,7 +15342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd1355714dd0ef4ab828346f07e4409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 16
 --- !u!1 &6129966137492230338
 GameObject:
   m_ObjectHideFlags: 0
@@ -15553,7 +15553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd1355714dd0ef4ab828346f07e4409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 8
 --- !u!1 &6193149634886277746
 GameObject:
   m_ObjectHideFlags: 0
@@ -17305,7 +17305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd1355714dd0ef4ab828346f07e4409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 16
 --- !u!1 &6989432286324772915
 GameObject:
   m_ObjectHideFlags: 0
@@ -18322,7 +18322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd1355714dd0ef4ab828346f07e4409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 13
 --- !u!1 &7261358340599964145
 GameObject:
   m_ObjectHideFlags: 0
@@ -18565,7 +18565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd1355714dd0ef4ab828346f07e4409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 6
 --- !u!1 &7346856396674271812
 GameObject:
   m_ObjectHideFlags: 0
@@ -20184,7 +20184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd1355714dd0ef4ab828346f07e4409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 16
 --- !u!1 &7785828124000064423
 GameObject:
   m_ObjectHideFlags: 0
@@ -20549,7 +20549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd1355714dd0ef4ab828346f07e4409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 5
 --- !u!1 &7862491373816321604
 GameObject:
   m_ObjectHideFlags: 0
@@ -20760,7 +20760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd1355714dd0ef4ab828346f07e4409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 12
 --- !u!1 &7948903865240843313
 GameObject:
   m_ObjectHideFlags: 0
@@ -21642,7 +21642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd1355714dd0ef4ab828346f07e4409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 14
 --- !u!1 &8454478946208724745
 GameObject:
   m_ObjectHideFlags: 0
@@ -23056,7 +23056,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd1355714dd0ef4ab828346f07e4409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 8
 --- !u!1 &9103940194154012464
 GameObject:
   m_ObjectHideFlags: 0
