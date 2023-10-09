@@ -33,7 +33,8 @@ public class AnimationsManager : MonoBehaviourPunCallbacks
                 {
                     anim.Play(attackAnimationNames[0]);
                     isAttacking = false;
-                    audioSourceSword.Play();
+                    //audioSourceSword.Play();
+                    this.GetComponent<PhotonView>().RPC("PlaySwingSound", RpcTarget.AllBuffered);
                 }
 
                 currentIntex++;
@@ -56,7 +57,8 @@ public class AnimationsManager : MonoBehaviourPunCallbacks
     {
         anim.Play("GetHit");
         isAttacking = true;
-        audioSourceGethit.Play();
+        //audioSourceGethit.Play();
+        this.GetComponent<PhotonView>().RPC("PlayHitSound", RpcTarget.AllBuffered);
     }
 
     public void OnComboAttackAnimationFinished()
@@ -104,6 +106,21 @@ public class AnimationsManager : MonoBehaviourPunCallbacks
 
       
 
+    }
+
+
+    [PunRPC]
+    public void PlaySwingSound()
+    {
+        audioSourceSword.Play();
+    }
+
+
+    [PunRPC]
+
+    public void PlayHitSound()
+    {
+        audioSourceGethit.Play();
     }
 
   
