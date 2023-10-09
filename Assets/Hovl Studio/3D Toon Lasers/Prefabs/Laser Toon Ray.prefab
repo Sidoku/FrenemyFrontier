@@ -24510,7 +24510,6 @@ GameObject:
   - component: {fileID: 4925992790362698}
   - component: {fileID: 114373721087596714}
   - component: {fileID: 120259910876211832}
-  - component: {fileID: 8276913971830819561}
   - component: {fileID: 5115733430130812424}
   m_Layer: 0
   m_Name: Laser Toon Ray
@@ -24663,26 +24662,6 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!114 &8276913971830819561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1485167307701956}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34eaaa61a659c77459445f54af26e60e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  particleSystemsToSync:
-  - {fileID: 198537810720586068}
-  - {fileID: 198574548267110672}
-  - {fileID: 198459696465251128}
-  - {fileID: 198797574035562284}
-  - {fileID: 198218217116832704}
-  - {fileID: 198818064947152984}
-  - {fileID: 198190093368918348}
 --- !u!114 &5115733430130812424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24701,8 +24680,7 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents:
-  - {fileID: 8276913971830819561}
+  ObservedComponents: []
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0

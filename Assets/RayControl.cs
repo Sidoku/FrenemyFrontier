@@ -12,7 +12,7 @@ public class RayControl : MonoBehaviourPunCallbacks
     void Start()
     {
         
-        ps =  GetComponentInChildren<ParticleSystemSync>();
+        //ps =  GetComponentInChildren<ParticleSystemSync>();
     }
 
     // Update is called once per frame

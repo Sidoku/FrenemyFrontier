@@ -115,8 +115,9 @@ public class DamageControlCrim : MonoBehaviourPunCallbacks
 
                 if (Health <= 0)
                 {
-                    StartCoroutine(ResetSpawnAndHealth());
-                    StartCoroutine(AddDeathBounty(vd));
+                    SetHealth(100);
+                    StartCoroutine(ResetSpawnAndHealth(vd));
+                    
                     if (this.GetComponent<CoinsCollected>().coinsCollected >= 0 && photonView.IsMine)
                     {
                         this.GetComponent<PhotonView>().RPC("LossCoins", RpcTarget.AllBuffered, (int)this.GetComponent<CoinsCollected>().coinsCollected / 2);
@@ -139,15 +140,29 @@ public class DamageControlCrim : MonoBehaviourPunCallbacks
    
 
 
-   public IEnumerator ResetSpawnAndHealth()
+   public IEnumerator ResetSpawnAndHealth(int vd)
     {
 
         this.gameObject.GetComponent<CriminalRespawn>().Respawn();
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
         SetHealth(100);
+        StartCoroutine(AddDeathBounty(vd));
+        
         // exl.gameObject.GetComponent<PhotonView>().RPC("RemoveText", RpcTarget.AllBuffered);
         this.GetComponent<PhotonView>().RPC("RemoveWeapon", RpcTarget.AllBuffered);
        
+
+    }
+
+    public IEnumerator ResetSpawnAndHealthAfterJail()
+    {
+
+        this.gameObject.GetComponent<CriminalRespawn>().Respawn();
+        yield return new WaitForSeconds(1f);
+        SetHealth(100);
+    
+        this.GetComponent<PhotonView>().RPC("RemoveWeapon", RpcTarget.AllBuffered);
+
 
     }
 
@@ -167,7 +182,7 @@ public class DamageControlCrim : MonoBehaviourPunCallbacks
             bh.RPC("KillAckBH", RpcTarget.AllBuffered);
          
         }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.1f);
        
         if(photonView.IsMine)
         {

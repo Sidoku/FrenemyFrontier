@@ -7,7 +7,7 @@ public class CrimUpdateSlider : MonoBehaviourPunCallbacks
 {
     public Slider slider;
     private float currentValue;
-
+    
 
     void Start()
     {
@@ -33,6 +33,7 @@ public class CrimUpdateSlider : MonoBehaviourPunCallbacks
         if (photonView.IsMine)
         {
             slider.gameObject.SetActive(true);
+         
             StartCoroutine(CrimReduceSliderValue());
         }
 
@@ -43,13 +44,16 @@ public class CrimUpdateSlider : MonoBehaviourPunCallbacks
         {
             while (true)
             {
-                yield return new WaitForSeconds(1f); // Wait for 1 second
+              
+                    yield return new WaitForSeconds(1f); // Wait for 1 second
 
-                // Reduce the slider value by 1
-                currentValue--;
+                    // Reduce the slider value by 1
+                    currentValue--;
 
-                // Update the slider value
-                slider.value = currentValue;
+                    // Update the slider value
+                    slider.value = currentValue;
+                
+               
 
 
                 if (this.GetComponent<GotHold>().gotHold == false)
@@ -57,7 +61,7 @@ public class CrimUpdateSlider : MonoBehaviourPunCallbacks
                     currentValue = slider.maxValue;
                     slider.value = currentValue;
                     slider.gameObject.SetActive(false);
-
+                    
                     break;
                 }
 
@@ -67,7 +71,7 @@ public class CrimUpdateSlider : MonoBehaviourPunCallbacks
                     currentValue = slider.maxValue;
                     slider.value = currentValue;
                     slider.gameObject.SetActive(false);
-
+                   
                     break;
                 }
             }

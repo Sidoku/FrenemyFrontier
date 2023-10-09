@@ -21,7 +21,8 @@ public class DoorActions : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && endtereddoor)
         {
             Debug.Log("After pressign E");
-
+            this.GetComponent<MeshCollider>().enabled = false;
+            
             if (anim.GetBool("DoorOpen"))
             {
                 anim.SetBool("DoorOpen", false);
@@ -35,6 +36,8 @@ public class DoorActions : MonoBehaviour
             }
 
         }
+
+      
     }
 
 
@@ -51,4 +54,16 @@ public class DoorActions : MonoBehaviour
     {
         endtereddoor = false;
     }
+
+
+   public void EnableCollider()
+    {
+        this.gameObject.GetComponent<MeshCollider>().enabled = true;
+    }
+
+    public void DisableCollider()
+    {
+        this.gameObject.GetComponent<MeshCollider>().enabled = false;
+    }
+
 }

@@ -83,9 +83,10 @@ public class DamageControlBon : MonoBehaviourPunCallbacks
 
             if (Health <= 0)
             {
-                StartCoroutine(ResetSpawnAndHealth());
+                Health = 100;
+                StartCoroutine(ResetSpawnAndHealth(vd));
 
-                StartCoroutine(AddDeathBounty(vd));
+                
                 
                if( this.GetComponent<CatchCrim>().criminal != null && this.GetComponent<CatchCrim>().gotCrim)
                 {
@@ -101,7 +102,7 @@ public class DamageControlBon : MonoBehaviourPunCallbacks
 
     }
 
-    IEnumerator ResetSpawnAndHealth()
+    IEnumerator ResetSpawnAndHealth(int vd)
     {
        if(this.GetComponent<CatchCrim>().criminal != null && this.GetComponent<CatchCrim>().gotCrim)
         {
@@ -110,9 +111,13 @@ public class DamageControlBon : MonoBehaviourPunCallbacks
                 this.GetComponent<CatchCrim>().criminal.GetComponent<PhotonView>().RPC("GotFree",RpcTarget.AllBuffered);
             }
         }
-        this.gameObject.transform.position = new Vector3(-5.532719612121582f, 1f, 119.69508361816406f);
-        yield return new WaitForSeconds(1.5f);
+        //this.gameObject.transform.position = new Vector3(-5.532719612121582f, 1f, 119.69508361816406f);
+        this.GetComponent<BHRespawn>().Respawn();
+        
+        yield return new WaitForSeconds(1f);
         Health = 100;
+        StartCoroutine(AddDeathBounty(vd));
+       
         healthtxt.text = "Health " + Health.ToString();
         this.GetComponent<PhotonView>().RPC("RemoveWeapon", RpcTarget.AllBuffered);
 
@@ -131,7 +136,7 @@ public class DamageControlBon : MonoBehaviourPunCallbacks
     {
         PhotonView cr = PhotonView.Find(vd);
         cr.RPC("KillAckCR", RpcTarget.AllBuffered);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.1f);
        
         if(photonView.IsMine)
         {

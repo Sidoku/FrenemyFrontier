@@ -44,30 +44,7 @@ public class ParticleSystemSync : MonoBehaviourPun, IPunObservable
         photonView.RPC("RPC_DeactivateParticleSystems", RpcTarget.All);
     }
 
-    [PunRPC]
-    private void RPC_ActivateParticleSystems()
-    {
-        // Activate all the stored Particle Systems
-        foreach (ParticleSystem ps in particleSystemsToSync)
-        {
-            // Set "playOnAwake" to false to prevent it from playing automatically on the local client
-            ps.playOnAwake = false;
-            ps.Play();
-
-            // Restore the original "playOnAwake" setting after starting the Particle System
-            ps.playOnAwake = initialPlayOnAwakeState[ps];
-        }
-    }
-
-    [PunRPC]
-    private void RPC_DeactivateParticleSystems()
-    {
-        // Deactivate all the stored Particle Systems
-        foreach (ParticleSystem ps in particleSystemsToSync)
-        {
-            ps.Stop();
-        }
-    }
+  
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {

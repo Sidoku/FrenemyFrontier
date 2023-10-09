@@ -2016,7 +2016,7 @@ PrefabInstance:
     - target: {fileID: 3851525245939043272, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}
       propertyPath: damage
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3862357008530399292, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}
@@ -2428,6 +2428,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 6097592988302141176, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6129966137492230338, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}
       propertyPath: m_Layer
@@ -2651,7 +2656,7 @@ PrefabInstance:
     - target: {fileID: 7429625812854512857, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}
       propertyPath: damage
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7463685876514911482, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}
@@ -3329,7 +3334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 100
   healthtxt: {fileID: 2626903115643890473}
-  attackCooldown: 0.2
+  attackCooldown: 0.5
 --- !u!114 &5077449448243385268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3361,6 +3366,26 @@ MonoBehaviour:
   killed: {fileID: 4523084391312929922}
   BountyPlus: {fileID: 4410322969247755018}
   BountyCollectedSound: {fileID: 306709002761022023}
+--- !u!114 &8111724697567401789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310464435797045970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41c823e7639fb2b4a97a0ab61f5ed65c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 2048
+  options:
+  - {x: -5.78, y: 1, z: 111.4}
+  - {x: -21.77, y: 1, z: 146.02}
+  - {x: -21.77, y: 1, z: 131.35}
+  - {x: 32.61, y: 1, z: 147.22}
 --- !u!4 &1829698238379681896 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2235192689199758735, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
@@ -3645,7 +3670,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5115733430130812424, guid: 0577a394196658646a5158796e8e7451,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8276913971830819561, guid: 0577a394196658646a5158796e8e7451, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0577a394196658646a5158796e8e7451, type: 3}
 --- !u!1 &3546045915225209150 stripped
 GameObject:

@@ -137,7 +137,8 @@ public class CatchCrim : MonoBehaviourPunCallbacks
     IEnumerator ConfirmPartcleDiable()
     {
         yield return new WaitForSeconds(1f);
-        this.GetComponentInChildren<RayControl>().RayDeactivate();
+        //this.GetComponentInChildren<RayControl>().RayDeactivate();
+        anim.GetComponent<PhotonView>().RPC("RayDeactivate", RpcTarget.AllBuffered);
     }
 
 

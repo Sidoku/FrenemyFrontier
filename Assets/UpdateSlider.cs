@@ -10,7 +10,7 @@ public class UpdateSlider : MonoBehaviourPunCallbacks
     private float currentValue;
     GameObject criminal;
     bool releasedbyjail = false;
-
+    
     void Start()
     {
         // Set the initial value of the slider to its max value (30 in this case)
@@ -37,6 +37,7 @@ public class UpdateSlider : MonoBehaviourPunCallbacks
         if(photonView.IsMine)
         {
             slider.gameObject.SetActive(true);
+          
             StartCoroutine(ReduceSliderValue());
         }
      
@@ -47,13 +48,17 @@ public class UpdateSlider : MonoBehaviourPunCallbacks
         {
             while (true)
             {
-                yield return new WaitForSeconds(1f); // Wait for 1 second
+              
+                    yield return new WaitForSeconds(1f); // Wait for 1 second
 
-                // Reduce the slider value by 1
-                currentValue--;
+                    // Reduce the slider value by 1
+                    currentValue--;
 
-                // Update the slider value
-                slider.value = currentValue;
+                    // Update the slider value
+                    slider.value = currentValue;
+                
+
+               
 
                 if (releasedbyjail)
                 {
@@ -62,6 +67,7 @@ public class UpdateSlider : MonoBehaviourPunCallbacks
                     slider.gameObject.SetActive(false);
                     this.gameObject.GetComponent<CatchCrim>().gotCrim = false;
                     releasedbyjail=false;
+                    
                     break;
                 }
 
@@ -71,6 +77,7 @@ public class UpdateSlider : MonoBehaviourPunCallbacks
                     slider.value = currentValue;
                     slider.gameObject.SetActive(false);
                     this.gameObject.GetComponent<CatchCrim>().gotCrim = false;
+                   
                     break;
                 }
                
@@ -82,6 +89,7 @@ public class UpdateSlider : MonoBehaviourPunCallbacks
                     slider.value = currentValue;
                     slider.gameObject.SetActive(false);
                     this.gameObject.GetComponent<CatchCrim>().gotCrim = false;
+                  
                     break;
                 }
             }

@@ -816,7 +816,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5322567207972689045}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.29700002, y: 0.808}
   m_AnchorMax: {x: 0.718398, y: 0.864}
@@ -952,7 +952,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5322567207972689045}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.29700002, y: 0.7282447}
   m_AnchorMax: {x: 0.718398, y: 0.78663296}
@@ -1283,7 +1283,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5322567207972689045}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.29700002, y: 0.6495107}
   m_AnchorMax: {x: 0.718398, y: 0.70914364}
@@ -1420,7 +1420,7 @@ RectTransform:
   m_Children:
   - {fileID: 6850250221905229679}
   m_Father: {fileID: 5322567207972689045}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.40765715, y: 0.46600002}
   m_AnchorMax: {x: 0.5918562, y: 0.5317529}
@@ -1705,7 +1705,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5322567207972689045}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.41752145, y: 0.10440281}
   m_AnchorMax: {x: 0.586, y: 0.39400002}
@@ -2507,7 +2507,7 @@ PrefabInstance:
     - target: {fileID: 336217470089994385, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 358752121613043814, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}
@@ -3137,6 +3137,11 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3571823620301205138, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.8000002
+      objectReference: {fileID: 0}
     - target: {fileID: 3629301023291885591, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}
       propertyPath: m_Layer
@@ -3532,6 +3537,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 5715271683733701645, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5715271683781496511, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}
       propertyPath: m_Layer
@@ -3571,6 +3581,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6097592988302141176, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6129966137492230338, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}
@@ -3685,7 +3700,7 @@ PrefabInstance:
     - target: {fileID: 6933363509676016457, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6937814622287938570, guid: ff34d6a50d21e3c4b9836fd0111cf2ef,
         type: 3}
@@ -4678,10 +4693,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   options:
-  - {x: -25.45, y: 1, z: 108.45}
-  - {x: 18.760002, y: 1, z: 107.77}
-  - {x: -26.78, y: 1, z: 151.99}
-  - {x: 18.39, y: 1, z: 147.62}
+  - {x: -22.67, y: 1, z: 137.5}
+  - {x: 6.82, y: 1, z: 131.74}
+  - {x: -34.11, y: 1, z: 99.06}
+  - {x: 34.52, y: 1, z: 99.349}
 --- !u!114 &1855911177787283892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4798,7 +4813,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 100
   healthtxt: {fileID: 6372193277886623725}
-  attackCooldown: 0.2
+  attackCooldown: 0.5
   onHold: 0
   catchme: {fileID: 7212021105693236520}
   exl: {fileID: 1325318146485967558}

@@ -14,7 +14,7 @@ public class GotHold : MonoBehaviourPunCallbacks
     int cvid;
     public AudioSource getiingHoldSound;
     public AudioSource getiingFreeSound;
-
+    bool excutedTimer = true;
     Vector3 offset = new Vector3(1f, 0f, -1f);
     // Start is called before the first frame update
     void Start()
@@ -72,9 +72,13 @@ public class GotHold : MonoBehaviourPunCallbacks
 
       
 
-        if(bountyHunter!= null)
+        if(bountyHunter!= null && excutedTimer)
         {
+
+            excutedTimer = false;
             bountyHunter.GetComponent<UpdateSlider>().MainReduce(cvid);
+            this.GetComponent<CrimUpdateSlider>().mainReduceSlider();
+            StartCoroutine(WaitAndResetExcute());
         }
       
 
@@ -191,21 +195,21 @@ public class GotHold : MonoBehaviourPunCallbacks
 
     public void ResetHealthSPwn()
     {
-        StartCoroutine(GetComponent<DamageControlCrim>().ResetSpawnAndHealth());
+        StartCoroutine(GetComponent<DamageControlCrim>().ResetSpawnAndHealthAfterJail());
     }
 
     IEnumerator ConfirmParticleDisable()
     {
         yield return new WaitForSeconds(1f);
-        this.GetComponentInChildren<RaysControl>().DisableParticleSystems();
-
+        //this.GetComponentInChildren<RaysControl>().DisableParticleSystems();
+        anim.GetComponent<PhotonView>().RPC("DisableParticleSystems", RpcTarget.AllBuffered);
     }
 
     IEnumerator ConfirmParticleEnable()
     {
         yield return new WaitForSeconds(1f);
-        this.GetComponentInChildren<RaysControl>().EnableParticleSystems();
-
+        //this.GetComponentInChildren<RaysControl>().EnableParticleSystems();
+        anim.GetComponent<PhotonView>().RPC("EnableParticleSystems", RpcTarget.AllBuffered);
     }
 
     IEnumerator CriminalCaluculations()
@@ -225,7 +229,7 @@ public class GotHold : MonoBehaviourPunCallbacks
     {
         if(photonView.IsMine)
         {
-            this.GetComponent<CrimUpdateSlider>().mainReduceSlider();
+            //this.GetComponent<CrimUpdateSlider>().mainReduceSlider();
         }
       
         yield return new WaitForSeconds(30f);
@@ -234,6 +238,12 @@ public class GotHold : MonoBehaviourPunCallbacks
             this.gameObject.GetComponent<PhotonView>().RPC("GotFree", RpcTarget.AllBuffered);
         }
       
+    }
+
+    IEnumerator WaitAndResetExcute()
+    {
+        yield return new WaitForSeconds(2f);
+        excutedTimer = true;
     }
 
 }

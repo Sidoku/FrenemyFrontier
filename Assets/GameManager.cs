@@ -33,13 +33,13 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         if ((int)PhotonNetwork.LocalPlayer.CustomProperties["playerRole"] == 0)
         {
-            GameObject bountyHunterPlayer = PhotonNetwork.Instantiate(playerToSpawn.name, bountyHunterSpawnPoint.position, Quaternion.identity);
+            GameObject bountyHunterPlayer = PhotonNetwork.Instantiate(playerToSpawn.name, bountyHunterSpawnPoint.position + new Vector3(Random.Range(1f,3f), 0f, 0f), Quaternion.identity);
 
             bountyHunterPlayer.GetComponent<PhotonView>().RPC("UpdatePlayerLooks", RpcTarget.AllBuffered, playerAvatar);
         }
         else
         {
-            GameObject CriminalPlayer = PhotonNetwork.Instantiate(playerToSpawn.name, CriminalSpawnPoint.position, Quaternion.identity);
+            GameObject CriminalPlayer = PhotonNetwork.Instantiate(playerToSpawn.name, CriminalSpawnPoint.position + new Vector3(Random.Range(1f, 3f), 0f, 0f), Quaternion.identity);
             CriminalPlayer.GetComponent<PhotonView>().RPC("UpdatePlayerLooks", RpcTarget.AllBuffered, playerAvatar);
         }
         PhotonNetwork.Instantiate(Task.name, initialTressureSpawnPoint.position, Quaternion.identity, 0);

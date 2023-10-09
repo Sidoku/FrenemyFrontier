@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-
+using TMPro;
+using StarterAssets;
 
 public class WeaponTracker : MonoBehaviourPunCallbacks
 {
@@ -11,6 +12,8 @@ public class WeaponTracker : MonoBehaviourPunCallbacks
     public bool weaponNotinHand = true;
     [SerializeField] GameObject doorPanel;
     public AudioSource weaponPickupSound;
+    public TMP_Text weaponStatText;
+    private GameObject weaponOnScreen = null;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +33,25 @@ public class WeaponTracker : MonoBehaviourPunCallbacks
         {
             weaponNotinHand = true;
         }
+
+        if(this.GetComponent<ThirdPersonController>().weaponSeen != null)
+        {
+            weaponOnScreen = FindChildGameObject(this.GetComponent<ThirdPersonController>().weaponSeen);
+            if(weaponOnScreen != null) {
+                weaponStatText.text = "Weapon Damage is " + weaponOnScreen.GetComponent<WeaponDamage>().damage.ToString();
+            }
+            else
+            {
+                weaponStatText.text = " ";
+            }
+           
+        }else
+        {
+            weaponOnScreen = null;
+            weaponStatText.text = " ";
+        }
+
+        
            
     }
 

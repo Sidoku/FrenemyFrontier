@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Unity.VisualScripting;
+using System;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 using Cinemachine;
@@ -100,6 +101,7 @@ namespace StarterAssets
         private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
         public Vector3 mouseWorldPosition;
+        public String weaponSeen;
 
         //Camera Sensitivity
         [SerializeField] private float normalSensitivity = 1.0f;
@@ -279,6 +281,14 @@ namespace StarterAssets
             if(Physics.Raycast(ray, out RaycastHit raycastHit))
             {
                 mouseWorldPosition = raycastHit.point;
+                if(isAiming && raycastHit.collider.gameObject.tag == "weapon")
+                {
+                    weaponSeen = raycastHit.collider.gameObject.name;
+                }else
+                {
+                    weaponSeen = null;
+                }
+               
             }
 
             if(Input.GetMouseButtonDown(2))
@@ -458,7 +468,7 @@ namespace StarterAssets
             {
                 if (FootstepAudioClips.Length > 0)
                 {
-                    var index = Random.Range(0, FootstepAudioClips.Length);
+                    var index = UnityEngine.Random.Range(0, FootstepAudioClips.Length);
                     AudioSource.PlayClipAtPoint(FootstepAudioClips[index], transform.TransformPoint(_controller.center), FootstepAudioVolume);
                 }
             }
