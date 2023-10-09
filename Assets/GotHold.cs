@@ -43,8 +43,16 @@ public class GotHold : MonoBehaviourPunCallbacks
 
         gotHold = false;
         getiingHoldSound.Stop();
+        if(!photonView.IsMine)
+        {
+            getiingHoldSound.Stop();
+        }
         anim.Play("GettingUnHold");
         getiingFreeSound.Play();
+        if(!photonView.IsMine)
+        {
+            getiingFreeSound.Play();
+        }
         StartCoroutine(ConfirmParticleDisable());
         this.GetComponent<DamageControlCrim>().SetHealth(50);
         //bountyHunter.GetComponent<CatchCrim>().gotCrim = false;
@@ -63,6 +71,10 @@ public class GotHold : MonoBehaviourPunCallbacks
             gotHold = true;
             anim.SetBool("GotHold", gotHold);
             getiingHoldSound.Play();
+            if(!photonView.IsMine)
+            {
+                getiingHoldSound.Play();
+            }
             StartCoroutine(GetFreeSoon());
 
 
@@ -91,6 +103,7 @@ public class GotHold : MonoBehaviourPunCallbacks
 
         gotHold = false;
         getiingHoldSound.Stop();
+        if(!photonView.IsMine) { getiingHoldSound.Play(); }
         anim.Play("GettingUnHold");
         StartCoroutine(ConfirmParticleDisable());
         this.transform.position = jailPos;
