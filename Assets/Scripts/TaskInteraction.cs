@@ -64,12 +64,14 @@ public class TaskInteraction : MonoBehaviourPunCallbacks
             if(Input.GetKeyDown(KeyCode.E))
             {
                 firstAttempt = true;
+                currentCrim = other.gameObject;
+                earnCoins = currentCrim.GetComponent<EarningCoins>();
             }
-       
-           // currentCrim = other.gameObject;
-           // FirstCrim = currentCrim;
-            other.gameObject.GetComponent<ThirdPersonController>().onHold = true;
-            other.gameObject.GetComponentInChildren<AnimationsManager>().anim.Play("Task");
+
+            // currentCrim = other.gameObject;
+            // FirstCrim = currentCrim;
+            currentCrim.GetComponent<ThirdPersonController>().onHold = true;
+            currentCrim.GetComponentInChildren<AnimationsManager>().anim.Play("Task");
             //Debug.LogWarning("Timer is running");
             if (!_isTimerStarted)
             {
@@ -80,7 +82,7 @@ public class TaskInteraction : MonoBehaviourPunCallbacks
             }
             // _isTimerStarted = true;
            
-            earnCoins = other.gameObject.GetComponent<EarningCoins>();
+            
         }
         else
         {
