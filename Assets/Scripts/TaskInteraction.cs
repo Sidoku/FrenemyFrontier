@@ -61,7 +61,11 @@ public class TaskInteraction : MonoBehaviourPunCallbacks
 
         if (other.gameObject.CompareTag("CR") && Input.GetKey(KeyCode.E) && !firstAttempt)
         {
-            firstAttempt= true;
+            if(Input.GetKeyDown(KeyCode.E))
+            {
+                firstAttempt = true;
+            }
+       
            // currentCrim = other.gameObject;
            // FirstCrim = currentCrim;
             other.gameObject.GetComponent<ThirdPersonController>().onHold = true;
