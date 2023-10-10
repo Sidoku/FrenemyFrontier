@@ -14,12 +14,14 @@ public class TaskInteraction : MonoBehaviourPunCallbacks
    public bool _isTimerStarted = false;
    private IEnumerator _taskTimer;
    public bool _isTaskCompleted = false;
+    bool firstAttempt = false;
    private EarningCoins earnCoins;
     [SerializeField] GameObject closedTressure;
     [SerializeField] GameObject OpenedTressure;
     public TaskSpawner taskSpawner;
     GameObject currentCrim;
     [SerializeField] TMP_Text timertext;
+    GameObject FirstCrim;
     // Update is called once per frame
 
     
@@ -57,9 +59,11 @@ public class TaskInteraction : MonoBehaviourPunCallbacks
 
        // Debug.LogError(other.gameObject.tag);
 
-        if (other.gameObject.CompareTag("CR") && Input.GetKey(KeyCode.E))
+        if (other.gameObject.CompareTag("CR") && Input.GetKey(KeyCode.E) && !firstAttempt)
         {
-            currentCrim = other.gameObject;
+            firstAttempt= true;
+           // currentCrim = other.gameObject;
+           // FirstCrim = currentCrim;
             other.gameObject.GetComponent<ThirdPersonController>().onHold = true;
             other.gameObject.GetComponentInChildren<AnimationsManager>().anim.Play("Task");
             //Debug.LogWarning("Timer is running");
@@ -93,6 +97,7 @@ public class TaskInteraction : MonoBehaviourPunCallbacks
 
    private void ResetTimer()
    {
+        firstAttempt = false;
        _isTimerStarted = false;
         closedTressure.SetActive(true);
         OpenedTressure.SetActive(false);
