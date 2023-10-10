@@ -93,12 +93,9 @@ public class CatchCrim : MonoBehaviourPunCallbacks
                 StartCoroutine(WeaponControl());
             //this.transform.LookAt(criminal.transform.position);
             anim.Play("Catch");
-            kamehamehaSound.Play();
-            if(!photonView.IsMine)
-            {
-                kamehamehaSound.Play();
-            }
-            //this.GetComponent<PhotonView>().RPC("PlayCatchSound", RpcTarget.AllBuffered);
+            //kamehamehaSound.Play();
+          
+            this.GetComponent<PhotonView>().RPC("PlayCatchSound", RpcTarget.AllBuffered);
             StartCoroutine(ConfirmPartcleDiable());
             this.GetComponentInChildren<AnimationsManager>().isAttacking= true;
             
@@ -146,8 +143,12 @@ public class CatchCrim : MonoBehaviourPunCallbacks
         anim.GetComponent<PhotonView>().RPC("RayDeactivate", RpcTarget.AllBuffered);
     }
 
-   
 
+    [PunRPC]
+    public void PlayCatchSound()
+    {
+        kamehamehaSound.Play();
+    }
 
 
 }

@@ -33,7 +33,7 @@ public class AnimationsManager : MonoBehaviourPunCallbacks
                 {
                     anim.Play(attackAnimationNames[0]);
                     isAttacking = false;
-                    //audioSourceSword.Play();
+                    audioSourceSword.Play();
                     //this.GetComponent<PhotonView>().RPC("PlaySwingSound", RpcTarget.AllBuffered);
                 }
 
@@ -45,10 +45,7 @@ public class AnimationsManager : MonoBehaviourPunCallbacks
         }
 
 
-        if (Input.GetMouseButtonDown(0) && !onHold)
-        {
-            audioSourceSword.Play();
-        }
+     
 
 
 
@@ -60,12 +57,9 @@ public class AnimationsManager : MonoBehaviourPunCallbacks
     {
         anim.Play("GetHit");
         isAttacking = true;
-        audioSourceGethit.Play();
-        if(!photonView.IsMine)
-        {
-            audioSourceGethit.Play();
-        }
-        //this.GetComponent<PhotonView>().RPC("PlayHitSound", RpcTarget.AllBuffered);
+        //audioSourceGethit.Play();
+       
+        this.GetComponent<PhotonView>().RPC("PlayHitSound", RpcTarget.AllBuffered);
     }
 
     public void OnComboAttackAnimationFinished()
@@ -116,8 +110,13 @@ public class AnimationsManager : MonoBehaviourPunCallbacks
     }
 
 
-  
-  
+    [PunRPC]
+    public void PlayHitSound()
+    {
+        audioSourceGethit.Play();
+    }
+
+
 
 
 
