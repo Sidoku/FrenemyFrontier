@@ -42,11 +42,11 @@ public class GotHold : MonoBehaviourPunCallbacks
     {
 
         gotHold = false;
-        getiingHoldSound.Stop();
-      
+       // getiingHoldSound.Stop();
+        this.GetComponent<PhotonView>().RPC("StopGetHoldSound", RpcTarget.AllBuffered);
         anim.Play("GettingUnHold");
-        getiingFreeSound.Play();
-      
+      //  getiingFreeSound.Play();
+        this.GetComponent<PhotonView>().RPC("PlayGetFreeSound", RpcTarget.AllBuffered);
         StartCoroutine(ConfirmParticleDisable());
         this.GetComponent<DamageControlCrim>().SetHealth(50);
         //bountyHunter.GetComponent<CatchCrim>().gotCrim = false;
@@ -64,8 +64,8 @@ public class GotHold : MonoBehaviourPunCallbacks
 
             gotHold = true;
             anim.SetBool("GotHold", gotHold);
-            getiingHoldSound.Play();
-          
+            //getiingHoldSound.Play();
+            this.GetComponent<PhotonView>().RPC("PlayGetHoldSound", RpcTarget.AllBuffered);
             StartCoroutine(GetFreeSoon());
 
 
@@ -93,8 +93,8 @@ public class GotHold : MonoBehaviourPunCallbacks
     {
 
         gotHold = false;
-        getiingHoldSound.Stop();
-       
+        // getiingHoldSound.Stop();
+        this.GetComponent<PhotonView>().RPC("StopGetHoldSound", RpcTarget.AllBuffered);
         anim.Play("GettingUnHold");
         StartCoroutine(ConfirmParticleDisable());
         this.transform.position = jailPos;
@@ -248,6 +248,25 @@ public class GotHold : MonoBehaviourPunCallbacks
     {
         yield return new WaitForSeconds(2f);
         excutedTimer = true;
+    }
+
+
+    [PunRPC]
+    public void PlayGetHoldSound()
+    {
+        getiingHoldSound.Play();
+    }
+
+    [PunRPC]
+    public void StopGetHoldSound()
+    {
+        getiingHoldSound.Stop();
+    }
+
+    [PunRPC]
+    public void PlayGetFreeSound()
+    {
+        getiingFreeSound.Play();
     }
 
 }

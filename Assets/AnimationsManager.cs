@@ -15,6 +15,7 @@ public class AnimationsManager : MonoBehaviourPunCallbacks
     public bool onHold = false;
     public AudioSource audioSourceSword;
     public AudioSource audioSourceGethit;
+    public AudioSource audioSourceFootStep;
 
     void Start()
     {
@@ -33,8 +34,8 @@ public class AnimationsManager : MonoBehaviourPunCallbacks
                 {
                     anim.Play(attackAnimationNames[0]);
                     isAttacking = false;
-                    audioSourceSword.Play();
-                    //this.GetComponent<PhotonView>().RPC("PlaySwingSound", RpcTarget.AllBuffered);
+                    //audioSourceSword.Play();
+                    this.GetComponent<PhotonView>().RPC("PlaySwingSound", RpcTarget.AllBuffered);
                 }
 
                 currentIntex++;
@@ -91,7 +92,8 @@ public class AnimationsManager : MonoBehaviourPunCallbacks
             {
                 currentIntex = comboIndex;
                 anim.Play(attackAnimationNames[comboIndex]);
-                audioSourceSword.Play();
+                // audioSourceSword.Play();
+                this.GetComponent<PhotonView>().RPC("PlaySwingSound", RpcTarget.AllBuffered);
             }
                  
                
@@ -117,6 +119,16 @@ public class AnimationsManager : MonoBehaviourPunCallbacks
     }
 
 
+    [PunRPC]
+    public void PlaySwingSound()
+    {
+        audioSourceSword.Play();
+    }
+
+    public void OnFootLand()
+    {
+        audioSourceFootStep.Play();
+    }
 
 
 
