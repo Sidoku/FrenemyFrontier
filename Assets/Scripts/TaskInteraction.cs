@@ -5,115 +5,230 @@ using StarterAssets;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Rendering.UI;
-using Photon.Pun;
 using TMPro;
+using Unity.VisualScripting;
 
 public class TaskInteraction : MonoBehaviourPunCallbacks
 {
    private float _timer = 10.0f;
-   public bool _isTimerStarted = false;
-   private IEnumerator _taskTimer;
-   public bool _isTaskCompleted = false;
-    bool firstAttempt = false;
-   private EarningCoins earnCoins;
+  // public bool _isTimerStarted = false;
+  // private IEnumerator _taskTimer;
+  // public bool _isTaskCompleted = false;
+    private bool treasureIsTaken = false;
+    private EarningCoins earnCoins;
     [SerializeField] GameObject closedTressure;
     [SerializeField] GameObject OpenedTressure;
     public TaskSpawner taskSpawner;
     GameObject currentCrim;
     [SerializeField] TMP_Text timertext;
     GameObject FirstCrim;
-    // Update is called once per frame
-
     
+    // Update is called once per frame
+    private enum InteractionState
+    {
+        Idle,
+        Interacting,
+        Completed
+    }
+    private InteractionState currentState = InteractionState.Idle;
     private void Start()
     {
         taskSpawner = GetComponent<TaskSpawner>();
+        if(!photonView.IsMine)
+            {
+            this.gameObject.SetActive(false);
+        }
+
     }
 
     void Update()
     {
-       
-        if (_isTimerStarted)
-        {
-            _timer -= Time.deltaTime;
-        
-        }
+        /*
+         if (_isTimerStarted)
+         {
+             _timer -= Time.deltaTime;
 
-        if (_timer <= 0f)
+         }
+        */
+
+
+       if (photonView.IsMine)
         {
-            Debug.LogWarning("Task completed");
-            ResetTimer();
-            //StartCoroutine(EarncoinsAnDChangeLocation());
-            if(photonView.IsMine)
+            if(currentState== InteractionState.Interacting) 
             {
-                earnCoins.EarnCoins();
-                
-            }
-            taskSpawner.GetComponent<PhotonView>().RPC("TaskRespawn", RpcTarget.AllBuffered);
-        }
+                _timer -= Time.deltaTime;
+                SetPlayerInteractions(currentCrim);
+                if (_timer <= 0f)
+                {
+                    Debug.LogWarning("Task completed");
+                    //ResetTimer();
+                    //StartCoroutine(EarncoinsAnDChangeLocation());
+                    //photonView.RPC("ReleaseTreasure", RpcTarget.All);
+                    ReleaseTreasure();
+                    earnCoins.EarnCoins();
+                    taskSpawner.GetComponent<PhotonView>().RPC("TaskRespawn", RpcTarget.AllBuffered);
+                   // currentState = InteractionState.Completed;
+                 
+                }
 
-        timertext.text = _timer.ToString();
+                timertext.text = _timer.ToString();
+            }
+
+       }
+        else
+       {
+            this.gameObject.SetActive(false);   
+        }
+     
     }
     private void OnTriggerStay(Collider other)
     {
 
-       // Debug.LogError(other.gameObject.tag);
-
-        if (other.gameObject.CompareTag("CR") && Input.GetKey(KeyCode.E) && !firstAttempt)
+        // Debug.LogError(other.gameObject.tag);
+        /*
+        if (photonView.IsMine)
         {
-            if(Input.GetKeyDown(KeyCode.E))
+            if (other.gameObject.CompareTag("CR") && Input.GetKey(KeyCode.E) && !treasureIsTaken)
             {
-                firstAttempt = true;
-                currentCrim = other.gameObject;
-                earnCoins = currentCrim.GetComponent<EarningCoins>();
-            }
 
-            // currentCrim = other.gameObject;
-            // FirstCrim = currentCrim;
-            currentCrim.GetComponent<ThirdPersonController>().onHold = true;
-            currentCrim.GetComponentInChildren<AnimationsManager>().anim.Play("Task");
-            //Debug.LogWarning("Timer is running");
-            if (!_isTimerStarted)
-            {
-                //timertext.transform.LookAt(other.transform.FindRecursively("PlayerCamera").position);
-                _isTimerStarted = true;
-                closedTressure.SetActive(false);
-                OpenedTressure.SetActive(true);
+               
+                // currentCrim = other.gameObject;
+                // FirstCrim = currentCrim;
+                other.gameObject.GetComponent<ThirdPersonController>().onHold = true;
+                other.gameObject.GetComponentInChildren<AnimationsManager>().anim.Play("Task");
+                //Debug.LogWarning("Timer is running");
+                if (!_isTimerStarted)
+                {
+                    //timertext.transform.LookAt(other.transform.FindRecursively("PlayerCamera").position);
+                    _isTimerStarted = true;
+                   
+                }
+                // _isTimerStarted = true;
+
+                earnCoins = other.gameObject.GetComponent<EarningCoins>();
             }
-            // _isTimerStarted = true;
-           
-            
+            else
+            {
+              // if (other.gameObject.CompareTag("CR") && !Input.GetKey(KeyCode.E))
+               // {
+                   other.gameObject.GetComponent<ThirdPersonController>().onHold = false;
+                   Debug.LogWarning("Player hold removed");
+                   ResetTimer();
+              // }
+
+
+            }
         }
-        else
+        */
+
+        if (photonView.IsMine && other.CompareTag("CR"))
         {
+            
+            if (Input.GetKey(KeyCode.E))
+            {
+                other.gameObject.GetComponent<ThirdPersonController>().onHold = true;
+                if (currentState == InteractionState.Idle)
+                {
+                   // photonView.RPC("SetInteractingState", RpcTarget.All);
+                    SetInteractingState();
+                    currentCrim = other.gameObject;
+                    
+                }
+            }
+            else
             {
                 other.gameObject.GetComponent<ThirdPersonController>().onHold = false;
-               // Debug.LogWarning("Player hold removed");
-                ResetTimer();
+                // Reset the interaction state and timer if the player releases the 'E' button.
+                if (currentState == InteractionState.Interacting)
+                {
+                    ResetInteractionState();
+                   
+                    
+                    //photonView.RPC("ResetInteractionState", RpcTarget.All);
+                  
+                   
+                }
+                
             }
         }
-    }
 
+
+
+    }
+    
     private void OnTriggerExit(Collider other)
     {
-        Debug.LogWarning("Exiting trigger");
-        other.gameObject.GetComponent<ThirdPersonController>().onHold = false;
-        ResetTimer();
-    }
+        if (photonView.IsMine && other.CompareTag("CR"))
+        {
+            other.gameObject.GetComponent<ThirdPersonController>().onHold = false;
+            ResetInteractionState();
+            ReleaseTreasure();
+        }
+           
 
+
+    }
+    
+
+    /*
    private void ResetTimer()
    {
-        firstAttempt = false;
-       _isTimerStarted = false;
-        closedTressure.SetActive(true);
-        OpenedTressure.SetActive(false);
+        photonView.RPC("SetTressureFree", RpcTarget.AllBuffered);
+        _isTimerStarted = false;
+     
         _timer = 10.0f;
    }
-   
-    IEnumerator EarncoinsAnDChangeLocation()
+    */
+ 
+    public void ResetInteractionState()
     {
-        yield return new WaitForSeconds(2f);
-       
+        currentState = InteractionState.Idle;
+        // Inform other players that the interaction state has been reset.
+       treasureIsTaken= false;
     }
+
+  
+    public void ReleaseTreasure()
+    {
+        // Perform actions to give the treasure to the player.
+        // Reset the treasure state.
+        currentState = InteractionState.Idle;
+        _timer = 10.0f;
+        treasureIsTaken = false;
+       // photonView.RPC("UpdateTreasureState", RpcTarget.All, false);
+        closedTressure.SetActive(true);
+        OpenedTressure.SetActive(false);
+        // Update the visual state of the treasure to indicate it's available.
+    }
+
+
+    
+    public void SetInteractingState()
+    {
+        currentState = InteractionState.Interacting;
+        treasureIsTaken= true;
+        //photonView.RPC("UpdateTreasureState", RpcTarget.All, true);
+        _timer = 10.0f;
+      
+        // Inform other players that the interaction state has changed.
+    }
+
+    void SetPlayerInteractions(GameObject player)
+    {
+        
+            player.GetComponent<ThirdPersonController>().onHold = true;
+            player.GetComponentInChildren<AnimationsManager>().anim.Play("Task");
+            earnCoins = player.GetComponent<EarningCoins>();
+            closedTressure.SetActive(false);
+            OpenedTressure.SetActive(true);
+       
+        
+         
+        
+   
+    }
+  
+    
+    
 
 }

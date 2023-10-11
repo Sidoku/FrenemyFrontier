@@ -14,6 +14,7 @@ public class WeaponTracker : MonoBehaviourPunCallbacks
     public AudioSource weaponPickupSound;
     public TMP_Text weaponStatText;
     private GameObject weaponOnScreen = null;
+    //[SerializeField] GameObject pickUPweaponPanel;
     // Start is called before the first frame update
     void Start()
     {
@@ -85,27 +86,36 @@ public class WeaponTracker : MonoBehaviourPunCallbacks
     }
 
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "weapon")
         {
-            Debug.Log("Selected Weapon " + other.gameObject.name);
-            string weoponName = other.gameObject.name;
-            if (currentWeapon !=null  && currentWeapon.activeSelf)
-            {
-                currentWeapon.SetActive(false);
-                currentWeapon = FindChildGameObject(weoponName);
-                currentWeapon.SetActive(true);
-            }
-            else
-            {
-                Debug.Log("Tried to find weapon");
-                currentWeapon = FindChildGameObject(weoponName);
-                currentWeapon.SetActive(true);
-            }
+            //pickUPweaponPanel.SetActive(true);
+            
+                
+                    Debug.Log("Selected Weapon " + other.gameObject.name);
+                    string weoponName = other.gameObject.name;
+                    if (currentWeapon != null && currentWeapon.activeSelf)
+                    {
+                        currentWeapon.SetActive(false);
+                        currentWeapon = FindChildGameObject(weoponName);
+                        currentWeapon.SetActive(true);
+                        //pickUPweaponPanel.SetActive(false);
+                    }
+                    else
+                    {
+                        Debug.Log("Tried to find weapon");
+                        currentWeapon = FindChildGameObject(weoponName);
+                        currentWeapon.SetActive(true);
+                        //pickUPweaponPanel.SetActive(false);
+                    }
+                
+               
 
-            Destroy(other.gameObject);
-            weaponPickupSound.Play();
+                Destroy(other.gameObject);
+                weaponPickupSound.Play();
+            
+            
         }
 
         if(other.gameObject.tag == "door")
@@ -123,6 +133,8 @@ public class WeaponTracker : MonoBehaviourPunCallbacks
         {
             doorPanel.SetActive(false);
         }
+
+      
     }
 
 

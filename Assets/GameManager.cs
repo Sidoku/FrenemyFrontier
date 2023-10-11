@@ -42,8 +42,8 @@ public class GameManager : MonoBehaviourPunCallbacks
             GameObject CriminalPlayer = PhotonNetwork.Instantiate(playerToSpawn.name, CriminalSpawnPoint.position + new Vector3(Random.Range(1f, 3f), 0f, 0f), Quaternion.identity);
             CriminalPlayer.GetComponent<PhotonView>().RPC("UpdatePlayerLooks", RpcTarget.AllBuffered, playerAvatar);
         }
-        PhotonNetwork.Instantiate(Task.name, initialTressureSpawnPoint.position, Quaternion.identity, 0);
-        PhotonNetwork.Instantiate(Task2.name, initialTressure2SpawnPoint.position, Quaternion.identity, 0);
+       PhotonNetwork.Instantiate(Task.name, initialTressureSpawnPoint.position, Quaternion.identity, 0);
+       PhotonNetwork.Instantiate(Task2.name, initialTressure2SpawnPoint.position, Quaternion.identity, 0);
         //PhotonNetwork.InstantiateRoomObject(pfPingWorldB.name, pingSpawnPoint.position + new Vector3(1f,0,0), Quaternion.identity);
         //PhotonNetwork.InstantiateRoomObject(pfPingWorldC.name, pingSpawnPoint.position, Quaternion.identity);
     }

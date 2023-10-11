@@ -7,7 +7,7 @@ using Photon.Pun;
 public class RayControl : MonoBehaviourPunCallbacks
 {
     public GameObject ray;
-    ParticleSystemSync ps;
+
     // Start is called before the first frame update
     void Start()
     {

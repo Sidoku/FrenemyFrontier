@@ -121,7 +121,7 @@ namespace StarterAssets
         /*public int pistolID;
         private bool isAttacking = false;*/
         public int pistolID;
-        private bool isAttacking = false;
+       
         public bool onHold = false;
 
         // timeout deltatime

@@ -11,7 +11,10 @@ public class TaskSpawner : MonoBehaviourPunCallbacks
     [PunRPC]
     public void TaskRespawn()
     {
-        
+        if (!photonView.IsMine)
+        {
+            return;
+        } 
         Debug.LogWarning("Task re-spawned");
         foreach (Vector3 op in options)
         {

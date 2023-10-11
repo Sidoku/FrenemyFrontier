@@ -7,7 +7,7 @@ using TMPro;
 public class CatchCrim : MonoBehaviourPunCallbacks
 {
     public LayerMask layer;
-    bool inTrigger = false;
+    
     public GameObject criminal = null;
     Animator anim;
     public bool gotCrim;

@@ -2,8 +2,9 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class DoorActions : MonoBehaviour
+public class DoorActions : MonoBehaviourPunCallbacks
 {
 
     Animator anim;
