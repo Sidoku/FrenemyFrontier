@@ -22,63 +22,57 @@ public class TaskInteraction : MonoBehaviourPunCallbacks
     GameObject currentCrim;
     [SerializeField] TMP_Text timertext;
     GameObject FirstCrim;
-    
-    // Update is called once per frame
+       
     private enum InteractionState
     {
         Idle,
-        Interacting,
-        Completed
+        Interacting
     }
+    
     private InteractionState currentState = InteractionState.Idle;
+    
     private void Start()
     {
         taskSpawner = GetComponent<TaskSpawner>();
         if(!photonView.IsMine)
-            {
+        {
             this.gameObject.SetActive(false);
         }
 
     }
-
+    
+// Update is called once per frame
     void Update()
     {
-        /*
-         if (_isTimerStarted)
-         {
-             _timer -= Time.deltaTime;
-
-         }
-        */
-
-
+       
        if (photonView.IsMine)
-        {
-            if(currentState== InteractionState.Interacting) 
-            {
-                _timer -= Time.deltaTime;
-                SetPlayerInteractions(currentCrim);
-                if (_timer <= 0f)
-                {
-                    Debug.LogWarning("Task completed");
-                    //ResetTimer();
-                    //StartCoroutine(EarncoinsAnDChangeLocation());
-                    //photonView.RPC("ReleaseTreasure", RpcTarget.All);
-                    ReleaseTreasure();
-                    earnCoins.EarnCoins();
-                    taskSpawner.GetComponent<PhotonView>().RPC("TaskRespawn", RpcTarget.AllBuffered);
+       {
+           if(currentState== InteractionState.Interacting) 
+           {
+               _timer -= Time.deltaTime;
+               SetPlayerInteractions(currentCrim);
+               if (_timer <= 0f)
+               {
+                   Debug.LogWarning("Task completed");
+                   //ResetTimer();
+                   //StartCoroutine(EarncoinsAnDChangeLocation());
+                   //photonView.RPC("ReleaseTreasure", RpcTarget.All);
+                   ReleaseTreasure();
+                   earnCoins.EarnCoins();
+                   taskSpawner.GetComponent<PhotonView>().RPC("TaskRespawn", RpcTarget.AllBuffered);
                    // currentState = InteractionState.Completed;
                  
-                }
+               }
 
-                timertext.text = _timer.ToString();
-            }
+               timertext.text = _timer.ToString();
+               timertext.text = Math.Floor(_timer).ToString();
+           }
 
        }
-        else
+       else
        {
             this.gameObject.SetActive(false);   
-        }
+       }
      
     }
     private void OnTriggerStay(Collider other)
