@@ -221,8 +221,4 @@ public class TaskInteraction : MonoBehaviourPunCallbacks
         
    
     }
-  
-    
-    
-
 }

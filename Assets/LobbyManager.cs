@@ -32,10 +32,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     void Start()
     {
         PhotonNetwork.JoinLobby();
-
-          
-
-      
     }
 
     // Update is called once per frame

@@ -6,11 +6,15 @@ using Photon.Pun;
 
 using TMPro;
 using System;
+using UnityEngine.UI;
 
 public class GameProgressBar : MonoBehaviourPunCallbacks
 {
 
     public int TotalCoinsCollected = 0;
+    public int maximumCoins = 10000;
+    public Image Image;
+    
     [SerializeField] TMP_Text coinsText;
 
     // Start is called before the first frame update
@@ -42,13 +46,21 @@ public class GameProgressBar : MonoBehaviourPunCallbacks
             if (criminals[0] != null && criminals[1] != null)
             {
                 TotalCoinsCollected = criminals[0].GetComponent<CoinsCollected>().coinsCollected + criminals[1].GetComponent<CoinsCollected>().coinsCollected;
-                coinsText.text = TotalCoinsCollected.ToString();
+                coinsText.text = TotalCoinsCollected.ToString() + " / 20000";
             }
+            
+            GetCurrentFill();
            
         }
         catch (IndexOutOfRangeException e)
         {
             Console.WriteLine(e.Message);
         }
+    }
+    
+    void GetCurrentFill()
+    {
+        float fillAmount = (float)TotalCoinsCollected / (float)maximumCoins;
+        Image.fillAmount = fillAmount;
     }
 }
