@@ -149,7 +149,7 @@ public class CatchCrim : MonoBehaviourPunCallbacks
 
     IEnumerator IncreaseLengthofCatch()
     {
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.5f);
         //this.GetComponentInChildren<RayControl>().RayDeactivate();
         anim.GetComponent<PhotonView>().RPC("IncreaseLenght", RpcTarget.AllBuffered);
     }

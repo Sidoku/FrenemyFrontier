@@ -10437,13 +10437,13 @@ MonoBehaviour:
     SynchronizeType: 2
     Name: MotionSpeed
   - Type: 4
-    SynchronizeType: 2
+    SynchronizeType: 0
     Name: hit1
   - Type: 4
-    SynchronizeType: 2
+    SynchronizeType: 0
     Name: hit2
   - Type: 4
-    SynchronizeType: 2
+    SynchronizeType: 0
     Name: hit3
   - Type: 4
     SynchronizeType: 0
@@ -10455,7 +10455,7 @@ MonoBehaviour:
     SynchronizeType: 2
     Name: CatchCrim
   m_SynchronizeLayers:
-  - SynchronizeType: 2
+  - SynchronizeType: 1
     LayerIndex: 0
 --- !u!114 &8933012155138871496
 MonoBehaviour:
