@@ -12,7 +12,7 @@ public class GameProgressBar : MonoBehaviourPunCallbacks
 {
 
     public int TotalCoinsCollected = 0;
-    public int maximumCoins = 10000;
+    public int maximumCoins = 20000;
     public Image Image;
     
     [SerializeField] TMP_Text coinsText;
