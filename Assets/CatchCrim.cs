@@ -92,6 +92,7 @@ public class CatchCrim : MonoBehaviourPunCallbacks
             if (this.gameObject.GetComponent<WeaponTracker>().currentWeapon != null)
                 StartCoroutine(WeaponControl());
             //this.transform.LookAt(criminal.transform.position);
+      
             anim.Play("Catch");
             //kamehamehaSound.Play();
           

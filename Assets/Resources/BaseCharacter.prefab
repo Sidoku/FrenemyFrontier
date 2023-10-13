@@ -3029,7 +3029,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1463440373542905653}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 901a1dcbc89ec764cbc297f0c6493c30, type: 3}
   m_Name: 
@@ -10452,7 +10452,7 @@ MonoBehaviour:
     SynchronizeType: 0
     Name: IsTaskCompleted
   m_SynchronizeLayers:
-  - SynchronizeType: 2
+  - SynchronizeType: 1
     LayerIndex: 0
 --- !u!114 &8933012155138871496
 MonoBehaviour:
@@ -10485,7 +10485,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4363146049094768330}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 901a1dcbc89ec764cbc297f0c6493c30, type: 3}
   m_Name: 
