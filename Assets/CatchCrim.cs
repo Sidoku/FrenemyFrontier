@@ -95,6 +95,7 @@ public class CatchCrim : MonoBehaviourPunCallbacks
 
             anim.SetBool("CatchCrim", true);
             anim.GetComponent<PhotonView>().RPC("RayActivate", RpcTarget.AllBuffered);
+            StartCoroutine(IncreaseLengthofCatch());
             //kamehamehaSound.Play();
             StartCoroutine(DisableCatch());
             this.GetComponent<PhotonView>().RPC("PlayCatchSound", RpcTarget.AllBuffered);
@@ -143,6 +144,14 @@ public class CatchCrim : MonoBehaviourPunCallbacks
         yield return new WaitForSeconds(1.5f);
         //this.GetComponentInChildren<RayControl>().RayDeactivate();
         anim.GetComponent<PhotonView>().RPC("RayDeactivate", RpcTarget.AllBuffered);
+    }
+
+
+    IEnumerator IncreaseLengthofCatch()
+    {
+        yield return new WaitForSeconds(0.4f);
+        //this.GetComponentInChildren<RayControl>().RayDeactivate();
+        anim.GetComponent<PhotonView>().RPC("IncreaseLenght", RpcTarget.AllBuffered);
     }
 
 
