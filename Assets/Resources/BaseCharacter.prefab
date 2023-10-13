@@ -10451,8 +10451,11 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 0
     Name: IsTaskCompleted
+  - Type: 4
+    SynchronizeType: 2
+    Name: CatchCrim
   m_SynchronizeLayers:
-  - SynchronizeType: 1
+  - SynchronizeType: 2
     LayerIndex: 0
 --- !u!114 &8933012155138871496
 MonoBehaviour:
