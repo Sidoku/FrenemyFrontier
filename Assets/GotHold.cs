@@ -162,6 +162,7 @@ public class GotHold : MonoBehaviourPunCallbacks
                 this.gameObject.GetComponent<ThirdPersonController>().JumpHeight = 0f;
                 this.gameObject.GetComponent<ThirdPersonController>().onHold = true;
                 this.gameObject.GetComponentInChildren<AnimationsManager>().onHold = true;
+                this.GetComponent<PhotonView>().RPC("RemoveWeapon", RpcTarget.AllBuffered);
             }
 
         }
