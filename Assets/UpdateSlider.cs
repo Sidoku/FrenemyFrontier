@@ -10,7 +10,7 @@ public class UpdateSlider : MonoBehaviourPunCallbacks
     private float currentValue;
     GameObject criminal;
     bool releasedbyjail = false;
-    
+    public LayerMask layerMask;
     void Start()
     {
         // Set the initial value of the slider to its max value (30 in this case)
@@ -56,7 +56,20 @@ public class UpdateSlider : MonoBehaviourPunCallbacks
 
                     // Update the slider value
                     slider.value = currentValue;
+
+
+                Collider[] colliders = Physics.OverlapSphere(this.transform.position, 2f, layerMask);
+                if (colliders[0] == null)
+
+                {
+                    currentValue = slider.maxValue;
+                    slider.value = currentValue;
+                    slider.gameObject.SetActive(false);
+                    this.gameObject.GetComponent<CatchCrim>().gotCrim = false;
                 
+
+                    break;
+                }
 
                
 

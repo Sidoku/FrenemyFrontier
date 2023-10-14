@@ -3385,6 +3385,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 1941552978047762155}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!114 &3730453896564098423
 MonoBehaviour:
   m_ObjectHideFlags: 0
