@@ -54,6 +54,10 @@ public class CriminalDetails : MonoBehaviourPunCallbacks
                 {
                     pic1.sprite = p3;
                 }
+               
+             
+               
+              
             }
 
             if (criminals[1] != null)
@@ -77,6 +81,9 @@ public class CriminalDetails : MonoBehaviourPunCallbacks
                 {
                     pic2.sprite = p3;
                 }
+               
+           
+
             }
         }catch(IndexOutOfRangeException e)
         {
