@@ -58,19 +58,7 @@ public class UpdateSlider : MonoBehaviourPunCallbacks
                     slider.value = currentValue;
 
 
-                Collider[] colliders = Physics.OverlapSphere(this.transform.position, 2f, layerMask);
-                if (colliders[0] == null)
-
-                {
-                    currentValue = slider.maxValue;
-                    slider.value = currentValue;
-                    slider.gameObject.SetActive(false);
-                    this.gameObject.GetComponent<CatchCrim>().gotCrim = false;
-                
-
-                    break;
-                }
-
+             
                
 
                 if (releasedbyjail)
