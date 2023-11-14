@@ -19,7 +19,7 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 <div align="center">
-    <img src="Title.png">
+    <img src="Title.png" , width = "500", height = "600">
 </div>
 
 <!-- PROJECT LOGO -->
