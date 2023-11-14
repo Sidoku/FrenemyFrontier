@@ -13,11 +13,11 @@ public class UpdateSlider : MonoBehaviourPunCallbacks
     public LayerMask layerMask;
     void Start()
     {
-        // Set the initial value of the slider to its max value (30 in this case)
+       
         currentValue = slider.maxValue;
         slider.value = currentValue;
         slider.gameObject.SetActive(false);
-        // Start the coroutine to reduce the slider value
+        
 
     }
 
@@ -27,7 +27,7 @@ public class UpdateSlider : MonoBehaviourPunCallbacks
     {
         this.gameObject.GetComponent<PhotonView>().RPC("SetCriminal", RpcTarget.AllBuffered,vid);
         this.gameObject.GetComponent<PhotonView>().RPC("ReduceSlider", RpcTarget.AllBuffered);
-        //ReduceSlider();  
+      
         
     }
 
@@ -49,12 +49,12 @@ public class UpdateSlider : MonoBehaviourPunCallbacks
             while (true)
             {
               
-                    yield return new WaitForSeconds(1f); // Wait for 1 second
+                    yield return new WaitForSeconds(1f); 
 
-                    // Reduce the slider value by 1
+                  
                     currentValue--;
 
-                    // Update the slider value
+                    
                     slider.value = currentValue;
 
 
@@ -83,7 +83,7 @@ public class UpdateSlider : MonoBehaviourPunCallbacks
                 }
                
 
-                // If the slider value reaches the minimum value (0), reset it to the maximum value (30)
+              
                 if (currentValue <= slider.minValue)
                 {
                     currentValue = slider.maxValue;
