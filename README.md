@@ -122,6 +122,10 @@ Major frameworks/libraries used to bootstrap the project.
 * Abhinav Chitty - abhinavreddy1925@gmail.com
 * [![LinkedIn][linkedin-shield]][linkedin-url]
 * [![Portfolio][portfolioIcon-url]][portfolio-url]
+* 
+* Siddharth Singhai - sidsinghai97@gmail.com
+* [![LinkedIn][linkedin-shield]][linkedin-url2]
+* [![Portfolio][portfolioIcon-url]][portfolio-url2]
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
@@ -129,3 +133,5 @@ Major frameworks/libraries used to bootstrap the project.
 [linkedin-url]: https://www.linkedin.com/in/abhinav-chitty-16a341152/
 [portfolioIcon-url]: https://img.shields.io/badge/-Portfolio-brightgreen
 [portfolio-url]: https://chittya.myportfolio.com/
+[linkedin-url2]: https://www.linkedin.com/in/siddharthsinghai97/
+[portfolio-url2]: https://sidsinghai97.wixsite.com/portfolio
