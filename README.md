@@ -107,13 +107,9 @@ Major frameworks/libraries used to bootstrap the project.
 ### Installation
 
 1. Clone the repo
-
 2. Open Project in Unity
-
 3. Play the Project inside Unity or Make a Build
-
 4. The project requires 4 players, so share the build file with your friends and create a room for them.
-
 5. Enjoy!
 
 <!-- CONTACT -->
@@ -122,7 +118,7 @@ Major frameworks/libraries used to bootstrap the project.
 * Abhinav Chitty - abhinavreddy1925@gmail.com
 * [![LinkedIn][linkedin-shield]][linkedin-url]
 * [![Portfolio][portfolioIcon-url]][portfolio-url]
-* 
+  
 * Siddharth Singhai - sidsinghai97@gmail.com
 * [![LinkedIn][linkedin-shield]][linkedin-url2]
 * [![Portfolio][portfolioIcon-url]][portfolio-url2]
