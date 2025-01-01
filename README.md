@@ -130,4 +130,4 @@ Major frameworks/libraries used to bootstrap the project.
 [portfolioIcon-url]: https://img.shields.io/badge/-Portfolio-brightgreen
 [portfolio-url]: https://chittya.myportfolio.com/
 [linkedin-url2]: https://www.linkedin.com/in/siddharthsinghai97/
-[portfolio-url2]: https://sidsinghai97.wixsite.com/portfolio
+[portfolio-url2]: https://sidoku.github.io
